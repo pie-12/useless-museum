@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #f7f4ee;
+  --foreground: #241f1a;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  min-height: 100vh;
+}
+
+/* Vintage Paper & Museum Texture */
+.vintage-paper {
+  background-color: #f7f4ee;
+  background-image: 
+    radial-gradient(#d6cfbe 0.75px, transparent 0.75px), 
+    radial-gradient(#d6cfbe 0.75px, #f7f4ee 0.75px);
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;
+}
+
+/* Win98 Button styling */
+.win98-box {
+  background-color: #c0c0c0;
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #000000;
+  border-bottom: 2px solid #000000;
+  box-shadow: inset 1px 1px 0px #dfdfdf, inset -1px -1px 0px #808080;
+}
+
+.win98-btn {
+  background-color: #c0c0c0;
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #000000;
+  border-bottom: 2px solid #000000;
+  box-shadow: inset 1px 1px 0px #dfdfdf, inset -1px -1px 0px #808080;
+  cursor: pointer;
+  user-select: none;
+}
+
+.win98-btn:active {
+  border-top: 2px solid #000000;
+  border-left: 2px solid #000000;
+  border-right: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
+  box-shadow: inset 1px 1px 0px #808080, inset -1px -1px 0px #dfdfdf;
+  padding-top: 2px;
+  padding-left: 2px;
+}
+
+/* Ticket dashed punch border */
+.ticket-dashed {
+  border-bottom: 2px dashed #b8a995;
+  position: relative;
+}
+
+.ticket-dashed::before,
+.ticket-dashed::after {
+  content: '';
+  position: absolute;
+  bottom: -9px;
+  width: 18px;
+  height: 18px;
+  background-color: var(--background);
+  border-radius: 50%;
+}
+
+.ticket-dashed::before {
+  left: -9px;
+}
+
+.ticket-dashed::after {
+  right: -9px;
+}
