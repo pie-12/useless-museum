@@ -118,5 +118,45 @@ export default function MuseumLobby() {
           const isOpen = room.status === "open";
 
           return (
-return <div className='min-h-screen bg-museum-paper'><div className='grid grid-cols-1 md:grid-cols-3 gap-6'></div></div>;
+            <div
+              key={room.id}
+              className={`relative flex flex-col justify-between rounded-xl border transition-all duration-300 ${
+                isOpen
+                  ? "bg-[#fffdfa] border-[#d8cdb9] shadow-sm hover:shadow-ticket hover:-translate-y-1 hover:border-[#bfae95]"
+                  : "bg-[#f5ede2]/60 border-[#ded3c2] opacity-80"
+              }`}
+            >
+              {/* Header của thẻ phòng */}
+              <div className="p-5 pb-3">
+                <div className="flex items-center justify-between gap-2 mb-3">
+                  <span className="font-mono text-xs font-bold text-museum-stamp px-2 py-0.5 rounded bg-[#f7e6e6] border border-[#f0cccc]">
+                    PHÒNG {room.roomNumber < 10 ? `0${room.roomNumber}` : room.roomNumber}
+                  </span>
+
+                  <span
+                    className={`text-[11px] font-mono px-2 py-0.5 rounded-full flex items-center gap-1 ${
+                      isOpen
+                        ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
+                        : "bg-amber-50 text-amber-700 border border-amber-200"
+                    }`}
+                  >
+                    {isOpen ? (
+                      <>
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                        Đang mở cửa
+                      </>
+                    ) : (
+                      <>
+                        <Hammer className="w-3 h-3" />
+                        Đang lắp đặt
+                      </>
+                    )}
+                  </span>
+                </div>
+
+                <h3 className="font-serif font-black text-xl text-museum-wood mb-1">
+                  {room.title}
+                </h3>
+                <p className="text-xs font-serif italic text-museum-stamp mb-3">
+return <div className='min-h-screen bg-museum-paper'></div>;
 }
