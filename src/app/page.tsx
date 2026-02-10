@@ -58,5 +58,65 @@ export default function MuseumLobby() {
           <a
             href="#room-list"
             className="w-full sm:w-auto px-5 py-3.5 rounded-lg bg-[#efe7d8] hover:bg-[#e4dac7] text-museum-wood border border-[#d5c7b3] font-serif text-sm font-semibold flex items-center justify-center gap-2 transition-colors"
-return <div className='min-h-screen bg-museum-paper'></div>;
+          >
+            <Compass className="w-4 h-4" />
+            <span>Xem Toàn Bộ Sơ Đồ Bảo Tàng</span>
+          </a>
+        </div>
+      </section>
+
+      {/* Thanh bộ lọc danh mục */}
+      <div id="room-list" className="pt-4 mb-8">
+        <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-[#dfd6c6]">
+          <div className="flex items-center gap-2">
+            <span className="font-serif font-bold text-museum-wood text-lg">
+              Sơ Đồ 15 Gian Trưng Bày
+            </span>
+            <span className="text-xs font-mono bg-[#e8ded0] text-museum-sepia px-2 py-0.5 rounded-full border border-[#d4c6b2]">
+              {filteredRooms.length} phòng
+            </span>
+          </div>
+
+          <div className="flex items-center gap-2 text-xs font-mono">
+            <button
+              onClick={() => setFilterStatus("all")}
+              className={`px-3 py-1.5 rounded-md transition-colors ${
+                filterStatus === "all"
+                  ? "bg-museum-wood text-white font-bold"
+                  : "bg-[#eee4d2] text-museum-sepia hover:bg-[#e3d7c3]"
+              }`}
+            >
+              Tất cả
+            </button>
+            <button
+              onClick={() => setFilterStatus("open")}
+              className={`px-3 py-1.5 rounded-md transition-colors ${
+                filterStatus === "open"
+                  ? "bg-emerald-800 text-white font-bold"
+                  : "bg-[#eee4d2] text-museum-sepia hover:bg-[#e3d7c3]"
+              }`}
+            >
+              Đang mở cửa
+            </button>
+            <button
+              onClick={() => setFilterStatus("coming-soon")}
+              className={`px-3 py-1.5 rounded-md transition-colors ${
+                filterStatus === "coming-soon"
+                  ? "bg-amber-800 text-white font-bold"
+                  : "bg-[#eee4d2] text-museum-sepia hover:bg-[#e3d7c3]"
+              }`}
+            >
+              Sắp ra mắt
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Lưới các phòng triển lãm */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {filteredRooms.map((room) => {
+          const isOpen = room.status === "open";
+
+          return (
+return <div className='min-h-screen bg-museum-paper'><div className='grid grid-cols-1 md:grid-cols-3 gap-6'></div></div>;
 }
