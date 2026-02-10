@@ -158,5 +158,44 @@ export default function MuseumLobby() {
                   {room.title}
                 </h3>
                 <p className="text-xs font-serif italic text-museum-stamp mb-3">
-return <div className='min-h-screen bg-museum-paper'></div>;
+                  "{room.subtitle}"
+                </p>
+                <p className="text-xs text-museum-sepia line-clamp-3 leading-relaxed">
+                  {room.description}
+                </p>
+              </div>
+
+              {/* Footer của thẻ phòng */}
+              <div className="p-5 pt-3 border-t border-[#f0e7d8] mt-2 bg-[#fcf9f2] rounded-b-xl flex items-center justify-between gap-2">
+                <div className="flex flex-wrap gap-1">
+                  {room.tags.slice(0, 2).map((tag) => (
+                    <span
+                      key={tag}
+                      className="text-[10px] font-mono text-museum-sepia bg-[#ece2d0] px-1.5 py-0.5 rounded"
+                    >
+                      #{tag}
+                    </span>
+                  ))}
+                </div>
+
+                {isOpen ? (
+                  <Link
+                    href={`/rooms/${room.id}`}
+                    className="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-serif font-bold text-museum-wood hover:text-museum-stamp transition-colors group"
+                  >
+                    <span>Vào xem</span>
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                ) : (
+                  <span className="text-[11px] font-serif italic text-museum-sepia/70">
+                    Sắp khánh thành
+                  </span>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
 }
