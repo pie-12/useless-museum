@@ -138,5 +138,91 @@ export function VagueClock() {
     <div className="max-w-2xl mx-auto px-4 py-8">
       {/* Khung đồng hồ phong cách Vintage Paper / Gỗ cổ điển */}
       <div className="bg-[#fffdf9] border-2 border-[#d5c7b3] rounded-3xl p-6 sm:p-10 shadow-ticket text-center relative overflow-hidden">
-return <div>Đang xem giờ...</div>;
+        {/* Con dấu chứng nhận cổ vật */}
+        <div className="absolute top-4 right-4 rotate-12 border-2 border-museum-stamp/60 px-2 py-0.5 rounded text-[10px] font-mono text-museum-stamp uppercase font-bold tracking-widest pointer-events-none">
+          Cổ vật số 02
+        </div>
+
+        {/* Biểu tượng mặt trời / mặt trăng */}
+        <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#f4ece0] border-2 border-[#dfd2be] mx-auto flex items-center justify-center mb-6 shadow-inner">
+          <IconComponent className={`w-10 h-10 sm:w-12 sm:h-12 ${vagueData.color} transition-all duration-500`} />
+        </div>
+
+        {/* Tiêu đề trạng thái mơ hồ */}
+        <span className="inline-block px-3 py-1 rounded-full bg-[#ebdccb] text-museum-wood text-xs font-mono font-semibold mb-3">
+          Tâm trạng: {vagueData.vibe}
+        </span>
+
+        <h2 className="font-serif font-black text-2xl sm:text-4xl text-museum-wood mb-4">
+          {vagueData.title}
+        </h2>
+
+        {/* Trích dẫn cộp mác châm biếm */}
+        <div className="bg-[#f9f5ec] border border-[#e8ddcb] rounded-2xl p-5 mb-8">
+          <p className="font-serif italic text-base sm:text-lg text-museum-ink leading-relaxed">
+            "{vagueData.quote}"
+          </p>
+        </div>
+
+        {/* Phản hồi càu nhàu khi user hỏi nhiều lần */}
+        {grumpyMessage && (
+          <div className="mb-6 p-3 rounded-lg bg-[#fcf0f0] border border-[#f5caca] text-xs font-mono text-museum-stamp animate-bounce">
+            ⚠️ {grumpyMessage}
+          </div>
+        )}
+
+        {/* Nút tương tác: Bấm để hỏi lại */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-8">
+          <button
+            onClick={handleNagClock}
+            className="w-full sm:w-auto px-6 py-3 rounded-xl bg-museum-wood hover:bg-museum-sepia text-white font-serif font-bold text-sm flex items-center justify-center gap-2 shadow-sm transition-all active:scale-95"
+          >
+            <RefreshCw className="w-4 h-4" />
+            <span>Gõ Cửa Hỏi Lại Mấy Giờ Rồi?</span>
+          </button>
+        </div>
+
+        {/* Cỗ máy thời gian giả lập (Time Machine Slider) */}
+        <div className="border-t border-[#ede3d4] pt-6 mt-6 text-left">
+          <div className="flex items-center justify-between text-xs font-mono text-museum-sepia mb-2">
+            <span className="flex items-center gap-1.5 font-bold">
+              <SlidersHorizontal className="w-3.5 h-3.5" />
+              Cỗ máy tua thời gian:
+            </span>
+            <span>
+              {simulatedHour !== null
+                ? `Đang giả lập: ~${simulatedHour}:30`
+                : "Thời gian thực tế trên máy bạn"}
+            </span>
+          </div>
+
+          <input
+            type="range"
+            min="0"
+            max="23"
+            value={activeHour}
+            onChange={(e) => setSimulatedHour(parseInt(e.target.value, 10))}
+            className="w-full h-2 bg-[#dfd2be] rounded-lg appearance-none cursor-pointer accent-museum-stamp"
+          />
+
+          <div className="flex justify-between text-[10px] font-mono text-museum-sepia mt-1">
+            <span>0h (Nửa đêm)</span>
+            <span>6h (Bình minh)</span>
+            <span>12h (Trưa hè)</span>
+            <span>18h (Hoàng hôn)</span>
+            <span>23h</span>
+          </div>
+
+          {simulatedHour !== null && (
+            <button
+              onClick={() => setSimulatedHour(null)}
+              className="mt-3 text-xs text-museum-stamp hover:underline font-mono"
+            >
+              ↩ Quay về thời gian thực tế
+            </button>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 }
