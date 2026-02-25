@@ -148,5 +148,61 @@ export function TiredKeyboard() {
                 ? "bg-rose-50/50 border-rose-300 text-rose-400 cursor-not-allowed"
                 : stamina < 30
                 ? "bg-[#fffaf0] border-amber-400 text-stone-800 shadow-inner"
-return <div>Máy đánh chữ...</div>;
+                : "bg-[#fcfaf5] border-[#d8c8b0] text-museum-ink focus:border-museum-wood"
+            }`}
+          />
+
+          {isExhausted && (
+            <div className="absolute inset-0 bg-white/70 backdrop-blur-[2px] rounded-2xl flex flex-col items-center justify-center p-4">
+              <span className="text-3xl mb-2 animate-bounce">😵‍💫</span>
+              <p className="font-serif font-bold text-museum-wood text-base">
+                Bàn Phím Đã Sập Nguồn!
+              </p>
+              <p className="text-xs text-museum-sepia font-mono mt-1">
+                Đang thở dốc và uống trà chanh để hồi máu...
+              </p>
+            </div>
+          )}
+        </div>
+
+        {/* Bảng thống kê vô nghĩa */}
+        <div className="grid grid-cols-3 gap-3 p-4 rounded-2xl bg-[#f7efe1] border border-[#e4d6c2] text-center">
+          <div>
+            <p className="text-[10px] font-mono uppercase text-museum-sepia">Tổng ký tự</p>
+            <p className="font-serif font-black text-xl text-museum-wood mt-0.5">
+              {totalKeyStrokes}
+            </p>
+          </div>
+          <div>
+            <p className="text-[10px] font-mono uppercase text-museum-sepia">Số lần ngất xỉu</p>
+            <p className="font-serif font-black text-xl text-museum-stamp mt-0.5">
+              {collapseCount}
+            </p>
+          </div>
+          <div>
+            <p className="text-[10px] font-mono uppercase text-museum-sepia">Độ kiên trì</p>
+            <p className="font-serif font-black text-xl text-emerald-800 mt-0.5">
+              {collapseCount === 0 ? "Bình yên" : collapseCount < 3 ? "Bạo lực vừa" : "Kẻ hủy diệt"}
+            </p>
+          </div>
+        </div>
+
+        {/* Nút reset */}
+        <div className="flex justify-end mt-4">
+          <button
+            onClick={() => {
+              setInputText("");
+              setStamina(100);
+              setIsExhausted(false);
+              setComplaint(null);
+            }}
+            className="text-xs font-mono text-museum-sepia hover:text-museum-wood flex items-center gap-1.5 transition-colors"
+          >
+            <RotateCcw className="w-3.5 h-3.5" />
+            <span>Xóa làm lại từ đầu</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 }
