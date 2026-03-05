@@ -6,6 +6,7 @@ import { TiredKeyboard } from "@/rooms/tired-keyboard/TiredKeyboard";
 import { UselessConverter } from "@/rooms/useless-converter/UselessConverter";
 import { VagueClock } from "@/rooms/vague-clock/VagueClock";
 import { TiredKeyboard } from "@/rooms/tired-keyboard/TiredKeyboard";
+import { UselessConverter } from "@/rooms/useless-converter/UselessConverter";
 import { ArrowLeft, Dices, Hammer, Sparkles, Tag } from "lucide-react";
 
 interface RoomPageProps {
@@ -31,6 +32,8 @@ export default async function RoomPage({ params }: RoomPageProps) {
   // Khớp slug với component tương ứng
   const renderRoomContent = () => {
     switch (room.id) {
+      case "useless-converter":
+        return <UselessConverter />;
       case "tired-keyboard":
         return <TiredKeyboard />;
       case "vague-clock":
