@@ -78,5 +78,45 @@ export function UselessConverter() {
             <button className="win98-btn w-4 h-4 text-[10px] text-black font-black flex items-center justify-center">
               <X className="w-2.5 h-2.5" />
             </button>
+          </div>
+        </div>
+
+        {/* Nội dung bên trong cửa sổ */}
+        <div className="p-4 bg-[#c0c0c0] text-black">
+          {/* Menu chọn loại đại lượng */}
+          <div className="flex gap-2 mb-4">
+            <button
+              onClick={() => {
+                setUnitType("distance");
+                setInputValue(5);
+              }}
+              className={`win98-btn px-3 py-1.5 text-xs font-bold ${
+                unitType === "distance" ? "bg-[#dfdfdf] border-inset" : ""
+              }`}
+            >
+              📏 Khoảng Cách (km)
+            </button>
+            <button
+              onClick={() => {
+                setUnitType("time");
+                setInputValue(2);
+              }}
+              className={`win98-btn px-3 py-1.5 text-xs font-bold ${
+                unitType === "time" ? "bg-[#dfdfdf] border-inset" : ""
+              }`}
+            >
+              ⏳ Thời Gian (giờ)
+            </button>
+            <button
+              onClick={() => {
+                setUnitType("money");
+                setInputValue(100);
+              }}
+              className={`win98-btn px-3 py-1.5 text-xs font-bold ${
+                unitType === "money" ? "bg-[#dfdfdf] border-inset" : ""
+              }`}
+            >
+              💰 Tiền Tệ (k VNĐ)
+            </button>
 return <div>Bộ đổi đơn vị...</div>;
 }
