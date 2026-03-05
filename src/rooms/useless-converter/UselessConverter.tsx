@@ -118,5 +118,56 @@ export function UselessConverter() {
             >
               💰 Tiền Tệ (k VNĐ)
             </button>
-return <div>Bộ đổi đơn vị...</div>;
+          </div>
+
+          {/* Ô nhập liệu */}
+          <div className="mb-4">
+            <label className="block text-xs font-bold mb-1">
+              Nhập giá trị cần quy đổi:
+            </label>
+            <div className="flex gap-2">
+              <input
+                type="number"
+                min="0"
+                value={inputValue}
+                onChange={(e) => setInputValue(Math.max(0, Number(e.target.value)))}
+                className="w-full bg-white border-2 border-t-[#808080] border-l-[#808080] border-r-white border-b-white px-3 py-2 text-base font-mono outline-none shadow-inner"
+              />
+              <span className="win98-box px-3 py-2 font-bold text-xs flex items-center">
+                {unitType === "distance" ? "km" : unitType === "time" ? "giờ" : ".000 đ"}
+              </span>
+            </div>
+          </div>
+
+          {/* Bảng kết quả quy đổi */}
+          <div className="bg-white border-2 border-t-[#808080] border-l-[#808080] border-r-white border-b-white p-3 mb-4 space-y-3">
+            <p className="text-[11px] font-bold text-[#000080] border-b border-gray-300 pb-1">
+              KẾT QUẢ ĐÃ ĐƯỢC CHỨNG NHẬN VÔ NGHĨA:
+            </p>
+
+            {results.map((res, idx) => (
+              <div key={idx} className="flex flex-col sm:flex-row sm:items-center justify-between text-xs gap-1">
+                <span className="text-gray-700">{res.label}:</span>
+                <span className="font-bold text-black bg-[#f0f0f0] px-2 py-0.5 rounded border border-gray-300 font-mono">
+                  {res.val} <span className="text-[10px] text-gray-500 font-normal">{res.unit}</span>
+                </span>
+              </div>
+            ))}
+          </div>
+
+          {/* Chân cửa sổ Win98 */}
+          <div className="flex items-center justify-between text-[11px] text-gray-600 border-t border-gray-400 pt-2">
+            <span>Trạng thái: 100% Không có giá trị thực tế</span>
+            <button
+              onClick={() => setInputValue(Math.floor(Math.random() * 50) + 1)}
+              className="win98-btn px-2 py-1 text-[11px] font-bold flex items-center gap-1"
+            >
+              <Sparkles className="w-3 h-3" />
+              <span>Số ngẫu nhiên</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
