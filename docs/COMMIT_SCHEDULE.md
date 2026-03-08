@@ -22,25 +22,23 @@ git commit -m "<commit message>"
 
 ## 2. Bảng Theo Dõi Chi Tiết Các Commit
 
-| STT | Thời gian (Dự kiến) | Mã / Nhãn | Nội dung Commit | Trạng thái |
-| :---: | :---: | :---: | :--- | :---: |
-| 1 | 2026-02-02 09:30:00 | `docs` | `docs: add project architecture and design documentation` | ⏳ Đang tạo |
-| 2 | 2026-02-02 11:15:00 | `docs` | `docs: define comprehensive catalog for 15 museum rooms` | ⏳ Đang tạo |
-| 3 | 2026-02-02 14:45:00 | `docs` | `docs: establish commit scheduling and backdating roadmap` | ⏳ Đang tạo |
-| 4 | 2026-02-03 09:10:00 | `chore` | `chore: setup project readme and repository ignore rules` | ⏳ Chờ |
-| 5 | 2026-02-03 14:30:00 | `chore` | `chore: bootstrap Next.js 15 project with TypeScript and Tailwind CSS` | ⏳ Chờ |
-| 6 | 2026-02-05 10:20:00 | `feat` | `feat(core): implement museum rooms registry configuration` | ⏳ Chờ |
-| 7 | 2026-02-07 15:40:00 | `feat(ui)` | `feat(ui): design vintage museum lobby layout and room directory` | ⏳ Chờ |
-| 8 | 2026-02-10 11:00:00 | `feat(nav)`| `feat(nav): add random room teleport button and navigation bar` | ⏳ Chờ |
-| 9 | 2026-02-12 16:30:00 | `feat(core)`| `feat(core): setup dynamic room routing with error boundaries` | ⏳ Chờ |
-| 10 | 2026-02-18 10:15:00 | `feat(room-2)`| `feat(room-2): implement vague clock time estimation logic` | ⏳ Chờ |
-| 11 | 2026-02-18 15:50:00 | `feat(room-2)`| `feat(room-2): craft vintage aesthetic UI for vague clock` | ⏳ Chờ |
-| 12 | 2026-02-25 09:45:00 | `feat(room-10)`| `feat(room-10): implement typing speed and stamina fatigue engine` | ⏳ Chờ |
-| 13 | 2026-02-25 16:20:00 | `feat(room-10)`| `feat(room-10): add typewriter sound and weary shaking UI effects` | ⏳ Chờ |
-| 14 | 2026-03-05 10:30:00 | `feat(room-3)`| `feat(room-3): build Win98 calculator UI and useless unit converter` | ⏳ Chờ |
-| 15 | 2026-03-14 14:15:00 | `feat(room-8)`| `feat(room-8): add scroll odometer measuring distance vs Ba Na cable car` | ⏳ Chờ |
-| 16 | 2026-03-22 11:20:00 | `feat(room-11)`| `feat(room-11): create idle bonsai growing and wilting mechanics` | ⏳ Chờ |
-| 17 | 2026-03-29 15:30:00 | `feat(room-15)`| `feat(room-15): add bug personality quiz with shareable badge card` | ⏳ Chờ |
-| 18 | 2026-04-03 10:00:00 | `feat(room-1)`| `feat(room-1): connect Upstash Redis global counter for do-nothing button` | ⏳ Chờ |
-| 19 | 2026-04-07 16:00:00 | `feat(room-1)`| `feat(room-1): add funny idle achievements for do-nothing button` | ⏳ Chờ |
-| 20 | 2026-04-10 14:00:00 | `chore` | `chore: polish mobile responsive layout and complete museum v1.0 MVP` | ⏳ Chờ |
+| STT | Thời gian (Đã tạo) | Hash | Mã / Nhãn | Nội dung Commit | Trạng thái |
+| :---: | :---: | :---: | :---: | :--- | :---: |
+| 1 | 2026-02-02 09:30:00 | `b4322ea` | `docs` | `docs: add project architecture and design documentation` | ✅ Đã tạo |
+| 2 | 2026-02-02 11:15:00 | `9981ec2` | `docs` | `docs: define comprehensive catalog for 15 museum rooms` | ✅ Đã tạo |
+| 3 | 2026-02-02 14:45:00 | `237fc3c` | `docs` | `docs: establish commit scheduling and backdating roadmap` | ✅ Đã tạo |
+| 4 | 2026-02-03 09:10:00 | `d419e29` | `chore` | `chore: setup project readme and repository ignore rules` | ✅ Đã tạo |
+| 5 | 2026-02-03 14:30:00 | `03f1113` | `chore` | `chore: bootstrap Next.js 15 project with TypeScript and Tailwind CSS` | ✅ Đã tạo |
+| 6 | 2026-02-05 10:20:00 | `19a9372` | `feat(core)` | `feat(core): implement museum rooms registry configuration and theme tokens` | ✅ Đã tạo |
+| 7 | 2026-02-07 14:15:00 | `9fd51e2` | `feat(ui)` | `feat(ui): design vintage museum lobby layout and navigation chrome` | ✅ Đã tạo |
+| 8 | 2026-02-10 11:30:00 | `8ce5f1d` | `feat(lobby)`| `feat(lobby): implement museum exhibition hall with random teleporter` | ✅ Đã tạo |
+| 9 | 2026-02-12 16:20:00 | `de0e6f9` | `feat(router)`| `feat(router): setup dynamic room routing with error boundaries` | ✅ Đã tạo |
+| 10 | 2026-02-18 10:45:00 | `d9915ec` | `feat(room-2)`| `feat(room-2): implement vague clock with humorous time approximations` | ✅ Đã tạo |
+| 11 | 2026-02-25 15:30:00 | `4580924` | `feat(room-10)`| `feat(room-10): implement fatigued keyboard with stamina exhaustion engine` | ✅ Đã tạo |
+| 12 | 2026-03-05 10:00:00 | `365b2f6` | `feat(room-3)`| `feat(room-3): build Win98 calculator and useless units converter` | ✅ Đã tạo |
+| 13 | 2026-03-14 14:15:00 | - | `feat(room-8)`| `feat(room-8): add scroll odometer measuring distance vs Ba Na cable car` | ⏳ Tiếp theo |
+| 14 | 2026-03-22 11:20:00 | - | `feat(room-11)`| `feat(room-11): create idle bonsai growing and wilting mechanics` | ⏳ Chờ |
+| 15 | 2026-03-29 15:30:00 | - | `feat(room-15)`| `feat(room-15): add bug personality quiz with shareable badge card` | ⏳ Chờ |
+| 16 | 2026-04-03 10:00:00 | - | `feat(room-1)`| `feat(room-1): connect Upstash Redis global counter for do-nothing button` | ⏳ Chờ |
+| 17 | 2026-04-07 16:00:00 | - | `feat(room-1)`| `feat(room-1): add funny idle achievements for do-nothing button` | ⏳ Chờ |
+| 18 | 2026-04-10 14:00:00 | - | `chore` | `chore: polish mobile responsive layout and complete museum v1.0 MVP` | ⏳ Chờ |
