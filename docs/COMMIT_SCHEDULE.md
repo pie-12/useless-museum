@@ -36,9 +36,12 @@ git commit -m "<commit message>"
 | 10 | 2026-02-18 10:45:00 | `d9915ec` | `feat(room-2)`| `feat(room-2): implement vague clock with humorous time approximations` | ✅ Đã tạo |
 | 11 | 2026-02-25 15:30:00 | `4580924` | `feat(room-10)`| `feat(room-10): implement fatigued keyboard with stamina exhaustion engine` | ✅ Đã tạo |
 | 12 | 2026-03-05 10:00:00 | `365b2f6` | `feat(room-3)`| `feat(room-3): build Win98 calculator and useless units converter` | ✅ Đã tạo |
-| 13 | 2026-03-14 14:15:00 | - | `feat(room-8)`| `feat(room-8): add scroll odometer measuring distance vs Ba Na cable car` | ⏳ Tiếp theo |
-| 14 | 2026-03-22 11:20:00 | - | `feat(room-11)`| `feat(room-11): create idle bonsai growing and wilting mechanics` | ⏳ Chờ |
-| 15 | 2026-03-29 15:30:00 | - | `feat(room-15)`| `feat(room-15): add bug personality quiz with shareable badge card` | ⏳ Chờ |
-| 16 | 2026-04-03 10:00:00 | - | `feat(room-1)`| `feat(room-1): connect Upstash Redis global counter for do-nothing button` | ⏳ Chờ |
-| 17 | 2026-04-07 16:00:00 | - | `feat(room-1)`| `feat(room-1): add funny idle achievements for do-nothing button` | ⏳ Chờ |
-| 18 | 2026-04-10 14:00:00 | - | `chore` | `chore: polish mobile responsive layout and complete museum v1.0 MVP` | ⏳ Chờ |
+| 13 | 2026-03-08 14:00:00 | `63e0899` | `docs` | `docs: update commit schedule with completed exhibits and verification hashes` | ✅ Đã tạo |
+| 14 | 2026-03-09 11:20:00 | `a959bbd` | `fix(header)`| `fix(header): optimize svg icon rendering and link contrast` | ✅ Đã tạo |
+| 15 | 2026-03-11 15:40:00 | `5927e45` | `docs(readme)`| `docs(readme): tone down readme to be nonchalant and straightforward` | ✅ Đã tạo |
+| 16 | 2026-03-14 14:15:00 | - | `feat(room-8)`| `feat(room-8): add scroll odometer measuring distance vs Ba Na cable car` | ⏳ Tiếp theo |
+| 17 | 2026-03-22 11:20:00 | - | `feat(room-11)`| `feat(room-11): create idle bonsai growing and wilting mechanics` | ⏳ Chờ |
+| 18 | 2026-03-29 15:30:00 | - | `feat(room-15)`| `feat(room-15): add bug personality quiz with shareable badge card` | ⏳ Chờ |
+| 19 | 2026-04-03 10:00:00 | - | `feat(room-1)`| `feat(room-1): connect Upstash Redis global counter for do-nothing button` | ⏳ Chờ |
+| 20 | 2026-04-07 16:00:00 | - | `feat(room-1)`| `feat(room-1): add funny idle achievements for do-nothing button` | ⏳ Chờ |
+| 21 | 2026-04-10 14:00:00 | - | `chore` | `chore: polish mobile responsive layout and complete museum v1.0 MVP` | ⏳ Chờ |
