@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="vi">
-      <body className="vintage-paper min-h-screen flex flex-col text-museum-ink antialiased selection:bg-[#ecd9c6] selection:text-museum-wood">
+      <body className="bg-white text-neutral-900 min-h-screen flex flex-col antialiased selection:bg-black selection:text-white">
         <MuseumHeader />
         <main className="flex-1">{children}</main>
         <MuseumFooter />

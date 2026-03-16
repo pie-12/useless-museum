@@ -4,9 +4,6 @@ import { MUSEUM_ROOMS } from "@/config/rooms.config";
 import { VagueClock } from "@/rooms/vague-clock/VagueClock";
 import { TiredKeyboard } from "@/rooms/tired-keyboard/TiredKeyboard";
 import { UselessConverter } from "@/rooms/useless-converter/UselessConverter";
-import { VagueClock } from "@/rooms/vague-clock/VagueClock";
-import { TiredKeyboard } from "@/rooms/tired-keyboard/TiredKeyboard";
-import { UselessConverter } from "@/rooms/useless-converter/UselessConverter";
 import { ArrowLeft, Dices, Hammer, Sparkles, Tag } from "lucide-react";
 
 interface RoomPageProps {
@@ -32,12 +29,6 @@ export default async function RoomPage({ params }: RoomPageProps) {
   // Khớp slug với component tương ứng
   const renderRoomContent = () => {
     switch (room.id) {
-      case "useless-converter":
-        return <UselessConverter />;
-      case "tired-keyboard":
-        return <TiredKeyboard />;
-      case "vague-clock":
-        return <VagueClock />;
       case "vague-clock":
         return <VagueClock />;
       case "tired-keyboard":
@@ -95,29 +86,29 @@ export default async function RoomPage({ params }: RoomPageProps) {
   return (
     <div className="min-h-[calc(100vh-140px)] flex flex-col justify-between">
       {/* Thanh điều hướng nhanh phía trên phòng */}
-      <div className="border-b border-[#dfd6c6] bg-[#f8f3e9]/60 px-4 py-2.5">
-        <div className="max-w-6xl mx-auto flex items-center justify-between gap-4">
+      <div className="border-b border-black/10 bg-neutral-50/80 px-4 sm:px-6 py-3 font-mono text-xs">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 text-xs font-serif font-bold text-museum-sepia hover:text-museum-wood transition-colors"
+            className="inline-flex items-center gap-1.5 text-black hover:text-neutral-500 transition-colors uppercase tracking-wider font-semibold"
           >
-            <ArrowLeft className="w-4 h-4" />
+            <ArrowLeft className="w-3.5 h-3.5" />
             <span>Sảnh chính</span>
           </Link>
 
-          <div className="flex items-center gap-2 text-xs font-mono">
-            <span className="text-museum-sepia hidden sm:inline">Bạn đang ở:</span>
-            <span className="font-bold text-museum-stamp bg-[#f7e6e6] px-2 py-0.5 rounded border border-[#f0cccc]">
-              Phòng {room.roomNumber < 10 ? `0${room.roomNumber}` : room.roomNumber}: {room.title}
+          <div className="flex items-center gap-2">
+            <span className="text-neutral-400 hidden sm:inline">Hiện vật:</span>
+            <span className="font-bold text-black border border-black px-2 py-0.5 uppercase tracking-wider text-[11px]">
+              № {room.roomNumber < 10 ? `0${room.roomNumber}` : room.roomNumber} — {room.title}
             </span>
           </div>
 
           <Link
             href="/"
-            className="inline-flex items-center gap-1 text-xs font-mono text-museum-wood hover:text-museum-stamp transition-colors"
+            className="inline-flex items-center gap-1 text-neutral-500 hover:text-black transition-colors uppercase tracking-wider text-[11px]"
           >
             <Dices className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Phòng khác</span>
+            <span className="hidden sm:inline">Ngẫu nhiên</span>
           </Link>
         </div>
       </div>
