@@ -4,14 +4,12 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { MUSEUM_ROOMS } from "@/config/rooms.config";
-import { Sparkles, Compass, DoorOpen, Hammer, Tag, ArrowRight, Dices } from "lucide-react";
+import { ArrowUpRight, ArrowRight, Shuffle } from "lucide-react";
 
-export default function MuseumLobby() {
+export default function EditorialMuseumLobby() {
   const router = useRouter();
-  const [filterCategory, setFilterCategory] = useState<string>("all");
   const [filterStatus, setFilterStatus] = useState<string>("all");
 
-  // Xử lý nút dịch chuyển ngẫu nhiên
   const handleRandomRoom = () => {
     const openRooms = MUSEUM_ROOMS.filter((r) => r.status === "open");
     if (openRooms.length === 0) return;
@@ -21,178 +19,169 @@ export default function MuseumLobby() {
   };
 
   const filteredRooms = MUSEUM_ROOMS.filter((room) => {
-    if (filterCategory !== "all" && room.category !== filterCategory) return false;
     if (filterStatus === "open" && room.status !== "open") return false;
     if (filterStatus === "coming-soon" && room.status === "open") return false;
     return true;
   });
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8 sm:py-12">
-      {/* Tiền sảnh / Hero Section */}
-      <section className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#eee5d3] border border-[#d8c8b0] text-xs font-mono text-museum-wood mb-4">
-          <Sparkles className="w-3.5 h-3.5 text-museum-stamp" />
-          <span>Triển lãm thường trực • Mở cửa 24/7 không nghỉ lễ</span>
-        </div>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
+      {/* Hero Exhibition Header */}
+      <section className="mb-16 sm:mb-24 border-b border-black/10 pb-12 sm:pb-16">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
+          <div className="max-w-3xl">
+            <p className="font-mono text-xs uppercase tracking-widest text-neutral-400 mb-3">
+              [ TRIỂN LÃM THƯỜNG TRỰC • SỐ DANH MỤC: 2026-FUTILE ]
+            </p>
+            <h1 className="font-serif font-black text-4xl sm:text-6xl lg:text-7xl tracking-tight text-black leading-[1.05] uppercase">
+              Bảo Tàng <br />
+              Đồ Vô Dụng.
+            </h1>
+            <p className="mt-6 text-neutral-600 text-sm sm:text-base leading-relaxed max-w-2xl font-sans">
+              Khảo cứu thị giác và tương tác về 15 hiện vật phần mềm được chế tác kỳ công nhưng triệt để không mang lại bất kỳ giá trị kinh tế nào. 
+              Một lời châm biếm nghiêm túc trước nỗi ám ảnh về năng suất công việc của kỷ nguyên số.
+            </p>
+          </div>
 
-        <h1 className="font-serif font-black text-3xl sm:text-5xl tracking-tight text-museum-wood leading-tight mb-4">
-          Bảo Tàng Đồ Vô Dụng
-        </h1>
-
-        <p className="text-museum-sepia text-sm sm:text-base leading-relaxed mb-8">
-          Nơi lưu giữ 15 công trình phần mềm được chế tác kỳ công nhưng hoàn toàn vô nghĩa. 
-          Không tạo ra giá trị kinh tế, không giúp bạn thăng tiến, chỉ giúp bạn cười một cái rồi quay lại làm việc tiếp.
-        </p>
-
-        {/* Nút bấm chủ đạo: Dắt tôi đến phòng ngẫu nhiên */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-          <button
-            onClick={handleRandomRoom}
-            className="w-full sm:w-auto px-6 py-3.5 rounded-lg bg-museum-stamp hover:bg-[#8f2727] text-white font-serif font-bold text-base flex items-center justify-center gap-2.5 shadow-ticket transition-all hover:scale-105 active:scale-95"
-          >
-            <Dices className="w-5 h-5 animate-pulse" />
-            <span>Dắt Tôi Tới Một Phòng Ngẫu Nhiên</span>
-          </button>
-
-          <a
-            href="#room-list"
-            className="w-full sm:w-auto px-5 py-3.5 rounded-lg bg-[#efe7d8] hover:bg-[#e4dac7] text-museum-wood border border-[#d5c7b3] font-serif text-sm font-semibold flex items-center justify-center gap-2 transition-colors"
-          >
-            <Compass className="w-4 h-4" />
-            <span>Xem Toàn Bộ Sơ Đồ Bảo Tàng</span>
-          </a>
+          {/* Quick Actions */}
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <button
+              onClick={handleRandomRoom}
+              className="px-6 py-3.5 bg-black text-white hover:bg-neutral-800 text-xs font-mono uppercase tracking-wider font-semibold flex items-center justify-center gap-2.5 transition-all group"
+            >
+              <Shuffle className="w-3.5 h-3.5 group-hover:rotate-180 transition-transform duration-500" />
+              <span>Phòng Ngẫu Nhiên</span>
+            </button>
+            <a
+              href="#exhibits"
+              className="px-6 py-3.5 border border-black/20 hover:border-black text-black text-xs font-mono uppercase tracking-wider font-semibold flex items-center justify-center gap-2 transition-colors"
+            >
+              <span>Sơ Đồ Danh Mục</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </a>
+          </div>
         </div>
       </section>
 
-      {/* Thanh bộ lọc danh mục */}
-      <div id="room-list" className="pt-4 mb-8">
-        <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-[#dfd6c6]">
-          <div className="flex items-center gap-2">
-            <span className="font-serif font-bold text-museum-wood text-lg">
-              Sơ Đồ 15 Gian Trưng Bày
-            </span>
-            <span className="text-xs font-mono bg-[#e8ded0] text-museum-sepia px-2 py-0.5 rounded-full border border-[#d4c6b2]">
-              {filteredRooms.length} phòng
-            </span>
-          </div>
+      {/* Exhibition Grid Controls */}
+      <div id="exhibits" className="mb-10 flex flex-wrap items-baseline justify-between gap-4 border-b border-black pb-4">
+        <div className="flex items-baseline gap-3">
+          <h2 className="font-serif font-black text-2xl text-black uppercase tracking-tight">
+            Danh Mục Hiện Vật
+          </h2>
+          <span className="font-mono text-xs text-neutral-400">
+            ({filteredRooms.length}/15)
+          </span>
+        </div>
 
-          <div className="flex items-center gap-2 text-xs font-mono">
-            <button
-              onClick={() => setFilterStatus("all")}
-              className={`px-3 py-1.5 rounded-md transition-colors ${
-                filterStatus === "all"
-                  ? "bg-museum-wood text-white font-bold"
-                  : "bg-[#eee4d2] text-museum-sepia hover:bg-[#e3d7c3]"
-              }`}
-            >
-              Tất cả
-            </button>
-            <button
-              onClick={() => setFilterStatus("open")}
-              className={`px-3 py-1.5 rounded-md transition-colors ${
-                filterStatus === "open"
-                  ? "bg-emerald-800 text-white font-bold"
-                  : "bg-[#eee4d2] text-museum-sepia hover:bg-[#e3d7c3]"
-              }`}
-            >
-              Đang mở cửa
-            </button>
-            <button
-              onClick={() => setFilterStatus("coming-soon")}
-              className={`px-3 py-1.5 rounded-md transition-colors ${
-                filterStatus === "coming-soon"
-                  ? "bg-amber-800 text-white font-bold"
-                  : "bg-[#eee4d2] text-museum-sepia hover:bg-[#e3d7c3]"
-              }`}
-            >
-              Sắp ra mắt
-            </button>
-          </div>
+        {/* Filter Tabs */}
+        <div className="flex items-center gap-2 text-xs font-mono">
+          <button
+            onClick={() => setFilterStatus("all")}
+            className={`px-3 py-1 transition-colors ${
+              filterStatus === "all"
+                ? "bg-black text-white font-bold"
+                : "text-neutral-500 hover:text-black"
+            }`}
+          >
+            TẤT CẢ ({MUSEUM_ROOMS.length})
+          </button>
+          <button
+            onClick={() => setFilterStatus("open")}
+            className={`px-3 py-1 transition-colors ${
+              filterStatus === "open"
+                ? "bg-black text-white font-bold"
+                : "text-neutral-500 hover:text-black"
+            }`}
+          >
+            ĐANG MỞ CỬA ({MUSEUM_ROOMS.filter((r) => r.status === "open").length})
+          </button>
+          <button
+            onClick={() => setFilterStatus("coming-soon")}
+            className={`px-3 py-1 transition-colors ${
+              filterStatus === "coming-soon"
+                ? "bg-black text-white font-bold"
+                : "text-neutral-500 hover:text-black"
+            }`}
+          >
+            ĐANG LẮP ĐẶT ({MUSEUM_ROOMS.filter((r) => r.status !== "open").length})
+          </button>
         </div>
       </div>
 
-      {/* Lưới các phòng triển lãm */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Minimalist Gallery Placards Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {filteredRooms.map((room) => {
           const isOpen = room.status === "open";
 
           return (
-            <div
+            <article
               key={room.id}
-              className={`relative flex flex-col justify-between rounded-xl border transition-all duration-300 ${
+              className={`group flex flex-col justify-between p-6 border transition-all duration-300 relative ${
                 isOpen
-                  ? "bg-[#fffdfa] border-[#d8cdb9] shadow-sm hover:shadow-ticket hover:-translate-y-1 hover:border-[#bfae95]"
-                  : "bg-[#f5ede2]/60 border-[#ded3c2] opacity-80"
+                  ? "border-black/15 hover:border-black bg-white"
+                  : "border-dashed border-neutral-300 bg-neutral-50/50 opacity-70"
               }`}
             >
-              {/* Header của thẻ phòng */}
-              <div className="p-5 pb-3">
-                <div className="flex items-center justify-between gap-2 mb-3">
-                  <span className="font-mono text-xs font-bold text-museum-stamp px-2 py-0.5 rounded bg-[#f7e6e6] border border-[#f0cccc]">
-                    PHÒNG {room.roomNumber < 10 ? `0${room.roomNumber}` : room.roomNumber}
+              {/* Placard Meta Header */}
+              <div>
+                <div className="flex items-baseline justify-between font-mono text-xs pb-4 mb-4 border-b border-neutral-100">
+                  <span className="font-bold text-black tracking-widest">
+                    № {room.roomNumber < 10 ? `0${room.roomNumber}` : room.roomNumber}
                   </span>
-
-                  <span
-                    className={`text-[11px] font-mono px-2 py-0.5 rounded-full flex items-center gap-1 ${
-                      isOpen
-                        ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
-                        : "bg-amber-50 text-amber-700 border border-amber-200"
-                    }`}
-                  >
+                  <span className="text-[10px] uppercase tracking-wider flex items-center gap-1.5">
                     {isOpen ? (
                       <>
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                        Đang mở cửa
+                        <span className="w-1.5 h-1.5 rounded-full bg-black" />
+                        <span className="text-black font-semibold">Đang mở</span>
                       </>
                     ) : (
                       <>
-                        <Hammer className="w-3 h-3" />
-                        Đang lắp đặt
+                        <span className="w-1.5 h-1.5 rounded-full bg-neutral-300" />
+                        <span className="text-neutral-400">Đang lưu kho</span>
                       </>
                     )}
                   </span>
                 </div>
 
-                <h3 className="font-serif font-black text-xl text-museum-wood mb-1">
+                {/* Exhibit Title */}
+                <h3 className="font-serif font-black text-2xl text-black tracking-tight mb-1 group-hover:underline">
                   {room.title}
                 </h3>
-                <p className="text-xs font-serif italic text-museum-stamp mb-3">
-                  "{room.subtitle}"
+
+                <p className="font-mono text-[11px] text-neutral-400 mb-4 uppercase tracking-wider">
+                  {room.author} • {room.styleTheme}
                 </p>
-                <p className="text-xs text-museum-sepia line-clamp-3 leading-relaxed">
+
+                {/* Conceptual blurb */}
+                <p className="text-xs text-neutral-600 leading-relaxed font-sans mb-6 line-clamp-3">
                   {room.description}
                 </p>
               </div>
 
-              {/* Footer của thẻ phòng */}
-              <div className="p-5 pt-3 border-t border-[#f0e7d8] mt-2 bg-[#fcf9f2] rounded-b-xl flex items-center justify-between gap-2">
-                <div className="flex flex-wrap gap-1">
-                  {room.tags.slice(0, 2).map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-[10px] font-mono text-museum-sepia bg-[#ece2d0] px-1.5 py-0.5 rounded"
-                    >
-                      #{tag}
-                    </span>
+              {/* Placard Bottom Link */}
+              <div className="pt-4 border-t border-neutral-100 flex items-center justify-between font-mono text-xs">
+                <div className="flex gap-1.5 text-[10px] text-neutral-400">
+                  {room.tags.slice(0, 2).map((t) => (
+                    <span key={t}>#{t}</span>
                   ))}
                 </div>
 
                 {isOpen ? (
                   <Link
                     href={`/rooms/${room.id}`}
-                    className="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-serif font-bold text-museum-wood hover:text-museum-stamp transition-colors group"
+                    className="inline-flex items-center gap-1 font-bold text-black hover:opacity-60 transition-opacity uppercase tracking-wider text-[11px]"
                   >
-                    <span>Vào xem</span>
-                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                    <span>Vào Xem</span>
+                    <ArrowUpRight className="w-3.5 h-3.5" />
                   </Link>
                 ) : (
-                  <span className="text-[11px] font-serif italic text-museum-sepia/70">
-                    Sắp khánh thành
+                  <span className="text-[10px] text-neutral-400 uppercase tracking-widest">
+                    Chờ duyệt
                   </span>
                 )}
               </div>
-            </div>
+            </article>
           );
         })}
       </div>
