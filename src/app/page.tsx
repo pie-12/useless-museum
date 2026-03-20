@@ -198,7 +198,57 @@ export default function Win98Desktop() {
               </button>
               <button 
                 onClick={() => setIsWelcomeOpen(false)}
+                className="win98-btn w-4 h-4 text-black text-[10px] font-bold flex items-center justify-center leading-none"
+              >
+                <X className="w-2.5 h-2.5" />
+              </button>
+            </div>
+          </div>
+
+          {/* Menu Bar cổ điển */}
+          <div className="bg-[#c0c0c0] border-b border-gray-400 px-2 py-0.5 flex gap-3 text-xs">
+            <span className="underline cursor-pointer">T</span>ệp tin
+            <span className="underline cursor-pointer">C</span>hỉnh sửa
+            <span className="underline cursor-pointer">X</span>em
+            <span className="underline cursor-pointer">T</span>rợ giúp
+          </div>
+
+          {/* Nội dung cửa sổ */}
+          <div className="p-4 bg-[#ffffff] win98-window-sunken m-2 text-xs font-mono space-y-3 max-h-[60vh] overflow-y-auto">
+            <div className="border-b border-gray-200 pb-2">
+              <h1 className="font-bold text-sm text-[#000080]">
+                BẢO TÀNG ĐỒ VÔ DỤNG (WINDOWS 98 EDITION)
+              </h1>
+              <p className="text-gray-500 text-[11px] mt-0.5">
+                Phiên bản hệ điều hành: 4.10.1998 • Bộ nhớ: 64 MB RAM
+              </p>
+            </div>
+
+            <p className="leading-relaxed text-gray-800">
+              Chào mừng bạn đến với triển lãm số bảo tồn những phát minh vô dụng nhất trên Internet.
+            </p>
+
+            <div className="bg-[#f0f0f0] p-2.5 border border-gray-300 text-gray-700 space-y-1">
+              <p className="font-bold text-black">HƯỚNG DẪN THAM QUAN:</p>
+              <p>• Nháy đúp (Double-click) vào bất kỳ biểu tượng nào trên màn hình để vào phòng.</p>
+              <p>• Trên điện thoại: Chạm vào biểu tượng rồi bấm nút bên dưới.</p>
+              <p>• Bấm nút <b>"Start"</b> ở góc trái bên dưới để dịch chuyển tức thời.</p>
+            </div>
+
+            {/* Các phòng đang mở cửa */}
+            <div>
+              <p className="font-bold text-emerald-800 mb-1">
+                CÁC PHÒNG ĐANG MỞ CỬA (KHUYÊN THỬ):
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1">
+                <button
+                  onClick={() => handleOpenRoom("vague-clock")}
+                  className="win98-btn p-2 text-left text-[11px] hover:bg-gray-100 flex items-center gap-1.5"
+                >
+                  <span>🕰️</span>
+                  <span className="truncate">Đồng Hồ Mơ Hồ</span>
+                </button>
 </main>
-<footer className='fixed bottom-0 left-0 right-0 h-10 win98-box z-40 flex items-center px-1'>Start</footer>
+<footer className='fixed bottom-0 left-0 right-0 h-10 win98-box z-40 flex items-center justify-between px-1'><div>Start</div><div className='win98-window-sunken px-2'>12:00</div></footer>
 </div>;
 }
