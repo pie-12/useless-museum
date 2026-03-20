@@ -298,6 +298,66 @@ export default function Win98Desktop() {
             className="win98-box w-full max-w-md shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
+            <div className="win98-titlebar text-xs">
+              <div className="flex items-center gap-1.5">
+                <span>⚠️</span>
+                <span>Thông Báo Hệ Thống</span>
+              </div>
+              <button 
+                onClick={() => setAlertMessage(null)}
+                className="win98-btn w-4 h-4 text-black text-[10px] font-bold flex items-center justify-center"
+              >
+                <X className="w-2.5 h-2.5" />
+              </button>
+            </div>
+
+            <div className="p-4 bg-[#c0c0c0] text-xs font-mono">
+              <div className="flex gap-3 mb-4">
+                <span className="text-3xl">💾</span>
+                <p className="whitespace-pre-line leading-relaxed text-black">
+                  {alertMessage}
+                </p>
+              </div>
+
+              <div className="flex justify-end gap-2 pt-2 border-t border-gray-400">
+                <button
+                  onClick={() => setAlertMessage(null)}
+                  className="win98-btn px-5 py-1.5 font-bold text-xs"
+                >
+                  OK
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Pop-up Start Menu */}
+      {isStartOpen && (
+        <div 
+          className="fixed bottom-10 left-0 w-64 win98-box z-50 shadow-2xl font-mono text-xs"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* Dải banner dọc màu xanh Windows 98 */}
+          <div className="flex">
+            <div className="w-8 bg-gradient-to-t from-[#000080] to-[#1084d0] text-white flex items-end justify-center pb-3 font-bold tracking-widest uppercase select-none">
+              <span className="transform -rotate-90 origin-center whitespace-nowrap text-xs">
+                Windows 98
+              </span>
+            </div>
+
+            <div className="flex-1 py-1 bg-[#c0c0c0]">
+              <button
+                onClick={handleRandomRoom}
+                className="w-full text-left px-3 py-2 hover:bg-[#000080] hover:text-white flex items-center gap-2.5 transition-colors"
+              >
+                <Dices className="w-4 h-4 text-amber-500" />
+                <span className="font-bold">Phòng Ngẫu Nhiên (Run...)</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  setIsStartOpen(false);
 </main>
 </div>;
 }
