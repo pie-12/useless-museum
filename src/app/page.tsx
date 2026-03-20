@@ -248,7 +248,56 @@ export default function Win98Desktop() {
                   <span>🕰️</span>
                   <span className="truncate">Đồng Hồ Mơ Hồ</span>
                 </button>
+                <button
+                  onClick={() => handleOpenRoom("tired-keyboard")}
+                  className="win98-btn p-2 text-left text-[11px] hover:bg-gray-100 flex items-center gap-1.5"
+                >
+                  <span>⌨️</span>
+                  <span className="truncate">Bàn Phím Mệt</span>
+                </button>
+                <button
+                  onClick={() => handleOpenRoom("useless-converter")}
+                  className="win98-btn p-2 text-left text-[11px] hover:bg-gray-100 flex items-center gap-1.5"
+                >
+                  <span>📏</span>
+                  <span className="truncate">Đổi Đơn Vị</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Nút chân cửa sổ */}
+          <div className="p-2 bg-[#c0c0c0] flex items-center justify-between text-xs">
+            <span className="text-[11px] text-gray-600">Trạng thái: Sẵn sàng</span>
+            <div className="flex gap-2">
+              <button
+                onClick={handleRandomRoom}
+                className="win98-btn px-3 py-1 font-bold text-xs flex items-center gap-1"
+              >
+                <Dices className="w-3.5 h-3.5" />
+                <span>Phòng Ngẫu Nhiên</span>
+              </button>
+              <button
+                onClick={() => setIsWelcomeOpen(false)}
+                className="win98-btn px-3 py-1 text-xs"
+              >
+                Đóng
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Cửa sổ Alert Win98 khi bấm phòng chưa mở hoặc lỗi */}
+      {alertMessage && (
+        <div 
+          className="fixed inset-0 bg-black/30 backdrop-blur-[1px] flex items-center justify-center p-4 z-50"
+          onClick={() => setAlertMessage(null)}
+        >
+          <div 
+            className="win98-box w-full max-w-md shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
 </main>
-<footer className='fixed bottom-0 left-0 right-0 h-10 win98-box z-40 flex items-center justify-between px-1'><div>Start</div><div className='win98-window-sunken px-2'>12:00</div></footer>
 </div>;
 }
