@@ -4,7 +4,7 @@ import { MUSEUM_ROOMS } from "@/config/rooms.config";
 import { VagueClock } from "@/rooms/vague-clock/VagueClock";
 import { TiredKeyboard } from "@/rooms/tired-keyboard/TiredKeyboard";
 import { UselessConverter } from "@/rooms/useless-converter/UselessConverter";
-import { ArrowLeft, Dices, Hammer, Sparkles, Tag } from "lucide-react";
+import { ArrowLeft, Dices, Hammer, Sparkles, Tag, Minus, Square, X } from "lucide-react";
 
 interface RoomPageProps {
   params: Promise<{
@@ -84,37 +84,73 @@ export default async function RoomPage({ params }: RoomPageProps) {
   };
 
   return (
-    <div className="min-h-[calc(100vh-140px)] flex flex-col justify-between">
-      {/* Thanh điều hướng nhanh phía trên phòng */}
-      <div className="border-b border-black/10 bg-neutral-50/80 px-4 sm:px-6 py-3 font-mono text-xs">
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-1.5 text-black hover:text-neutral-500 transition-colors uppercase tracking-wider font-semibold"
-          >
-            <ArrowLeft className="w-3.5 h-3.5" />
-            <span>Sảnh chính</span>
-          </Link>
-
+    <div className="min-h-screen bg-[#008080] p-2 sm:p-6 flex flex-col items-center justify-start font-mono">
+      {/* Cửa sổ ứng dụng Win98 */}
+      <div className="w-full max-w-5xl win98-box shadow-2xl flex flex-col mb-6">
+        {/* Title bar màu xanh chuẩn Win98 */}
+        <div className="win98-titlebar text-xs">
           <div className="flex items-center gap-2">
-            <span className="text-neutral-400 hidden sm:inline">Hiện vật:</span>
-            <span className="font-bold text-black border border-black px-2 py-0.5 uppercase tracking-wider text-[11px]">
-              № {room.roomNumber < 10 ? `0${room.roomNumber}` : room.roomNumber} — {room.title}
+            <span>💾</span>
+            <span className="font-bold truncate">
+              C:\ROOMS\Phong{room.roomNumber < 10 ? `0${room.roomNumber}` : room.roomNumber}_{room.id}.exe — [{room.title}]
             </span>
           </div>
 
-          <Link
-            href="/"
-            className="inline-flex items-center gap-1 text-neutral-500 hover:text-black transition-colors uppercase tracking-wider text-[11px]"
-          >
-            <Dices className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Ngẫu nhiên</span>
+          <div className="flex items-center gap-1">
+            <Link
+              href="/"
+              className="win98-btn w-4 h-4 text-black text-[10px] font-bold flex items-center justify-center"
+              title="Thu nhỏ về desktop"
+            >
+              <Minus className="w-2.5 h-2.5" />
+            </Link>
+            <div
+              className="win98-btn w-4 h-4 text-black text-[10px] font-bold flex items-center justify-center opacity-60 cursor-default"
+            >
+              <Square className="w-2 h-2" />
+            </div>
+            <Link
+              href="/"
+              className="win98-btn w-4 h-4 text-black text-[10px] font-bold flex items-center justify-center"
+              title="Đóng phòng quay về desktop"
+            >
+              <X className="w-2.5 h-2.5" />
+            </Link>
+          </div>
+        </div>
+
+        {/* Thanh Menu giả lập */}
+        <div className="bg-[#c0c0c0] border-b border-gray-400 px-2 py-0.5 flex items-center justify-between text-xs select-none">
+          <div className="flex gap-3">
+            <Link href="/" className="hover:bg-[#000080] hover:text-white px-1 rounded flex items-center gap-1">
+              <span>←</span>
+              <span className="underline">Q</span>uay lại Desktop
+            </Link>
+            <span className="text-gray-600 px-1 hidden sm:inline">
+              Chủ đề: {room.styleTheme}
+            </span>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <span className="text-[10px] text-gray-700 hidden sm:inline">
+              Trạng thái: 100% Vô dụng
+            </span>
+          </div>
+        </div>
+
+        {/* Nội dung bên trong cửa sổ */}
+        <div className="bg-[#f4f4f4] text-black p-2 sm:p-6 overflow-y-auto">
+          {renderRoomContent()}
+        </div>
+
+        {/* Status bar đáy cửa sổ */}
+        <div className="bg-[#c0c0c0] border-t border-gray-400 px-3 py-1 flex items-center justify-between text-[11px] text-gray-600">
+          <span>Phòng {room.roomNumber}/15 • {room.title}</span>
+          <Link href="/" className="hover:underline text-black font-bold">
+            [ Đóng cửa sổ ✕ ]
           </Link>
         </div>
       </div>
-
-      {/* Nội dung phòng trưng bày */}
-      <div className="flex-1 py-6">{renderRoomContent()}</div>
     </div>
   );
 }
