@@ -1,12 +1,17 @@
 import type { Metadata } from "next";
+import { Be_Vietnam_Pro } from "next/font/google";
 import "./globals.css";
-import { MuseumHeader } from "@/components/MuseumHeader";
-import { MuseumFooter } from "@/components/MuseumFooter";
+
+const beVietnamPro = Be_Vietnam_Pro({
+  subsets: ["latin", "vietnamese"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-sans",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
-  title: "Bảo Tàng Đồ Vô Dụng (Useless Museum)",
+  title: "Bảo Tàng Đồ Vô Dụng (Useless Museum 98)",
   description: "Bảo tồn và trưng bày những sáng kiến phần mềm vô nghĩa nhưng vui nhộn nhất trên Internet.",
-  keywords: ["useless web", "bảo tàng vô dụng", "pet project", "hài hước", "lập trình viên"],
 };
 
 export default function RootLayout({
@@ -15,11 +20,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="vi">
-      <body className="bg-white text-neutral-900 min-h-screen flex flex-col antialiased selection:bg-black selection:text-white">
-        <MuseumHeader />
-        <main className="flex-1">{children}</main>
-        <MuseumFooter />
+    <html lang="vi" className={beVietnamPro.variable}>
+      <body className="font-sans antialiased bg-[#008080] text-black min-h-screen select-none overflow-x-hidden">
+        {children}
       </body>
     </html>
   );
