@@ -358,6 +358,78 @@ export default function Win98Desktop() {
               <button
                 onClick={() => {
                   setIsStartOpen(false);
-</main>
-</div>;
+                  setIsWelcomeOpen(true);
+                }}
+                className="w-full text-left px-3 py-2 hover:bg-[#000080] hover:text-white flex items-center gap-2.5 transition-colors"
+              >
+                <Folder className="w-4 h-4 text-yellow-600" />
+                <span>Mở Sơ Đồ Bảo Tàng</span>
+              </button>
+
+              <a
+                href="https://github.com/pie-12/useless-museum"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full text-left px-3 py-2 hover:bg-[#000080] hover:text-white flex items-center gap-2.5 transition-colors block"
+              >
+                <Terminal className="w-4 h-4 text-emerald-600" />
+                <span>Mã Nguồn (GitHub)</span>
+              </a>
+
+              <div className="my-1 border-t border-gray-400 border-b border-white" />
+
+              <button
+                onClick={() => {
+                  setIsStartOpen(false);
+                  setAlertMessage("Bạn bấm Shut Down thật à?\n\nKhông có nút tắt máy nào ở đây đâu, quay lại làm việc hoặc ghé mấy phòng kia chơi tiếp đi bạn ơi!");
+                }}
+                className="w-full text-left px-3 py-2 hover:bg-[#000080] hover:text-white flex items-center gap-2.5 transition-colors"
+              >
+                <Power className="w-4 h-4 text-rose-600" />
+                <span>Tắt Máy (Shut Down...)</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Taskbar Windows 98 cố định dưới đáy màn hình */}
+      <footer className="fixed bottom-0 left-0 right-0 h-10 win98-box z-40 flex items-center justify-between px-1 font-mono text-xs select-none">
+        {/* Nút Start */}
+        <div className="flex items-center gap-1.5 h-full py-0.5">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsStartOpen(!isStartOpen);
+            }}
+            className={`win98-btn h-full px-2.5 flex items-center gap-1.5 font-black text-xs ${
+              isStartOpen ? "win98-btn-pressed" : ""
+            }`}
+          >
+            <span className="text-base">🪟</span>
+            <span>Start</span>
+          </button>
+
+          {/* Nút Tab trên Taskbar */}
+          <button
+            onClick={() => setIsWelcomeOpen(!isWelcomeOpen)}
+            className={`win98-btn h-full px-3 max-w-[200px] truncate text-[11px] flex items-center gap-1.5 ${
+              isWelcomeOpen ? "win98-btn-pressed font-bold" : ""
+            }`}
+          >
+            <span>📁</span>
+            <span className="truncate">Bảo Tàng Đồ Vô Dụng</span>
+          </button>
+        </div>
+
+        {/* System Tray (Đồng hồ & Loa) */}
+        <div className="win98-window-sunken h-full py-0.5 px-2.5 flex items-center gap-2 bg-[#c0c0c0]">
+          <Volume2 className="w-3.5 h-3.5 text-gray-700" />
+          <span className="text-xs font-bold text-black">
+            {currentTime || "12:00"}
+          </span>
+        </div>
+      </footer>
+    </div>
+  );
 }
