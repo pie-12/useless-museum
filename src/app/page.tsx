@@ -148,6 +148,57 @@ export default function Win98Desktop() {
           return (
             <div
               key={room.id}
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedIcon(room.id);
+              }}
+              onDoubleClick={(e) => {
+                e.stopPropagation();
+                handleOpenRoom(room.id);
+              }}
+              className={`flex flex-col items-center justify-center p-2 rounded cursor-pointer text-center w-24 sm:w-28 group transition-colors ${
+                isSelected ? "bg-[#000080]/80 text-white" : "hover:bg-white/10 text-white"
+              }`}
+            >
+              <div className="text-3xl sm:text-4xl mb-1 filter drop-shadow relative">
+                {getIconForRoom(room.roomNumber)}
+                {isOpen && (
+                  <span className="absolute -bottom-1 -right-1 w-2.5 h-2.5 bg-emerald-400 border border-black rounded-full" />
+                )}
+              </div>
+              <span className="text-[11px] sm:text-xs font-mono font-medium leading-tight px-1 rounded line-clamp-2">
+                {room.title}
+              </span>
+              <span className="text-[9px] font-mono text-emerald-200 mt-0.5">
+                {isOpen ? "[Mở cửa]" : "[Đang lắp]"}
+              </span>
+            </div>
+          );
+        })}
+      </main>
+
+      {/* Cửa sổ Chào mừng / Explorer (C:\BAO_TANG_DO_VO_DUNG) */}
+      {isWelcomeOpen && (
+        <div 
+          className="fixed top-12 sm:top-16 left-4 sm:left-1/2 sm:-translate-x-1/2 w-[calc(100%-2rem)] sm:w-[560px] win98-box z-30 shadow-2xl"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* Title bar */}
+          <div className="win98-titlebar text-xs">
+            <div className="flex items-center gap-1.5">
+              <span>🏛️</span>
+              <span className="truncate">C:\BẢO_TÀNG_ĐỒ_VÔ_DỤNG\HuongDan.txt</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <button 
+                onClick={() => setIsWelcomeOpen(false)}
+                className="win98-btn w-4 h-4 text-black text-[10px] font-bold flex items-center justify-center leading-none"
+              >
+                <Minus className="w-2.5 h-2.5" />
+              </button>
+              <button 
+                onClick={() => setIsWelcomeOpen(false)}
 </main>
+<footer className='fixed bottom-0 left-0 right-0 h-10 win98-box z-40 flex items-center px-1'>Start</footer>
 </div>;
 }
