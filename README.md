@@ -1,10 +1,10 @@
 # useless-museum
 
-Một cái web đóng vai bảo tàng chứa mấy thứ vô dụng. Bấm vào thì vui, không bấm thì cũng chẳng sao. Không giải quyết vấn đề gì của nhân loại cả.
+[ Tiếng Việt ] | [ English ](./README.en.md) | [ 日本語 ](./README.ja.md)
 
-Cứ tự bấm vào rồi tự xem, không có gì để spoil ở đây hết.
+---
 
-Lấy cảm hứng từ The Useless Web.
+Đây là 1 web bảo tàng vô dụng lấy cảm hứng từ The Useless Web.
 
 ---
 
