@@ -1,206 +1,185 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { BatteryCharging, BatteryWarning, Battery, Coffee, RotateCcw, Flame } from "lucide-react";
+import { playTypewriterClack } from "@/lib/sound";
+
+const PRIORITY_KEYS = ["E", "A", "O", "I", "N", "T", "H", "C", "R", "S", "L", "M", "D", "U", "B", "G", "V", "K", "Y", "P"];
+
+const KEYBOARD_ROWS = [
+  ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
+  ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
+  ["Z", "X", "C", "V", "B", "N", "M"],
+];
 
 export function TiredKeyboard() {
-  const [inputText, setInputText] = useState("");
-  const [stamina, setStamina] = useState(100);
-  const [isExhausted, setIsExhausted] = useState(false);
-  const [totalKeyStrokes, setTotalKeyStrokes] = useState(0);
-  const [collapseCount, setCollapseCount] = useState(0);
-  const [complaint, setComplaint] = useState<string | null>(null);
+  const [text, setText] = useState<string>("");
+  const [restingKeys, setRestingKeys] = useState<string[]>([]);
+  const [typedSinceLastRest, setTypedSinceLastRest] = useState<number>(0);
 
-  const lastKeyTimeRef = useRef<number>(Date.now());
-  const staminaRef = useRef<number>(100);
+  const lastTypedAtRef = useRef<number>(Date.now());
+  const restingKeysRef = useRef<string[]>([]);
+  restingKeysRef.current = restingKeys;
 
-  // Vòng lặp hồi phục thể lực khi người dùng nghỉ tay
+  // Auto recover 1 key every 5s after 30s of inactivity
   useEffect(() => {
-    const recoveryInterval = setInterval(() => {
+    const timer = setInterval(() => {
       const now = Date.now();
-      const idleTime = now - lastKeyTimeRef.current;
+      const idleTime = now - lastTypedAtRef.current;
 
-      if (idleTime > 1500) {
-        setStamina((prev) => {
-          const next = Math.min(100, prev + 8);
-          staminaRef.current = next;
-          if (next > 20) {
-            setIsExhausted(false);
-          }
-          if (next === 100) {
-            setComplaint(null);
-          }
-          return next;
-        });
+      if (idleTime >= 30000 && restingKeysRef.current.length > 0) {
+        setRestingKeys((prev) => prev.slice(0, prev.length - 1));
+        lastTypedAtRef.current = now - 25000; // Next key in 5s
       }
-    }, 300);
+    }, 1000);
 
-    return () => clearInterval(recoveryInterval);
+    return () => clearInterval(timer);
   }, []);
 
-  // Xử lý khi gõ phím
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (isExhausted) {
-      e.preventDefault();
-      setComplaint("Bàn phím đã bất tỉnh nhân sự! Xin đừng gõ nữa, hãy cho nó nghỉ 3 giây...");
-      return;
-    }
-
-    lastKeyTimeRef.current = Date.now();
-    setTotalKeyStrokes((prev) => prev + 1);
-
-    // Tính lượng thể lực bị tiêu hao
-    setStamina((prev) => {
-      const drain = Math.floor(Math.random() * 3) + 3; // Mất 3-5% mỗi phím
-      const next = Math.max(0, prev - drain);
-      staminaRef.current = next;
-
-      if (next <= 0) {
-        setIsExhausted(true);
-        setCollapseCount((c) => c + 1);
-        setComplaint("Bàn phím kiệt sức gục ngã! (Đang thở oxy...)");
-      } else if (next < 25) {
-        setComplaint("Phù... phù... gõ chậm lại chút đi bạn ơi, ngón tay bạn là súng máy à?");
-      } else if (next < 50) {
-        setComplaint("Bắt đầu thấy mỏi tay rồi đấy nhé...");
+  const triggerNextRestingKey = () => {
+    setRestingKeys((prev) => {
+      if (prev.length >= 8) return prev;
+      // Find candidate from priority keys
+      const candidate = PRIORITY_KEYS.find((k) => !prev.includes(k));
+      if (candidate) {
+        return [...prev, candidate];
       }
-
-      return next;
+      return prev;
     });
   };
 
-  const getBatteryColor = () => {
-    if (stamina > 60) return "bg-emerald-500 text-emerald-700";
-    if (stamina > 25) return "bg-amber-500 text-amber-700";
-    return "bg-rose-500 text-rose-700 animate-pulse";
+  const handleCharInput = (char: string) => {
+    const upper = char.toUpperCase();
+    if (restingKeys.includes(upper)) {
+      // Key on strike - reject input
+      return;
+    }
+
+    playTypewriterClack();
+    lastTypedAtRef.current = Date.now();
+    setText((prev) => prev + char);
+
+    const nextCount = typedSinceLastRest + 1;
+    if (nextCount >= 60) {
+      setTypedSinceLastRest(0);
+      triggerNextRestingKey();
+    } else {
+      setTypedSinceLastRest(nextCount);
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Backspace") {
+      playTypewriterClack();
+      setText((prev) => prev.slice(0, -1));
+      return;
+    }
+    if (e.key === "Enter") {
+      playTypewriterClack();
+      setText((prev) => prev + "\n");
+      return;
+    }
+    if (e.key === " ") {
+      playTypewriterClack();
+      setText((prev) => prev + " ");
+      return;
+    }
+
+    if (e.key.length === 1) {
+      e.preventDefault();
+      handleCharInput(e.key);
+    }
   };
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-8">
-      <div className="bg-[#fffdf9] border-2 border-[#d5c7b3] rounded-3xl p-6 sm:p-10 shadow-ticket">
-        {/* Header phòng */}
-        <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-[#dfd6c6] mb-6">
-          <div>
-            <span className="font-mono text-xs uppercase tracking-widest text-museum-stamp font-bold">
-              ★ PHÒNG 10 • BẢN TEST THỂ LỰC ★
-            </span>
-            <h2 className="font-serif font-black text-2xl sm:text-3xl text-museum-wood mt-1">
-              Bàn Phím Biết Mệt
-            </h2>
-            <p className="text-xs text-museum-sepia mt-1">
-              Hãy thử gõ một đoạn văn thật nhanh và xem bàn phím của bạn chịu đựng được bao lâu.
-            </p>
-          </div>
+    <div className="w-full max-w-2xl mx-auto py-4 px-2 select-none font-mono">
+      {/* Tờ giấy máy đánh chữ cổ điển */}
+      <div className="bg-[#faf8f2] border-2 border-[#d0c8b8] p-5 shadow-inner mb-6 min-h-[14rem] relative">
+        <div className="absolute top-2 right-3 text-[10px] text-gray-400 uppercase tracking-widest font-mono">
+          Máy đánh chữ cơ học
+        </div>
 
-          {/* Thanh thể lực (Stamina Bar) */}
-          <div className="w-full sm:w-64 bg-[#eee4d2] p-3 rounded-2xl border border-[#d8c8b0]">
-            <div className="flex items-center justify-between text-xs font-mono mb-1.5">
-              <span className="flex items-center gap-1 font-bold text-museum-wood">
-                {stamina > 60 ? (
-                  <BatteryCharging className="w-4 h-4 text-emerald-600" />
-                ) : stamina > 25 ? (
-                  <Battery className="w-4 h-4 text-amber-600" />
-                ) : (
-                  <BatteryWarning className="w-4 h-4 text-rose-600 animate-bounce" />
-                )}
-                Thể lực phím:
-              </span>
-              <span className="font-bold">{stamina}%</span>
-            </div>
+        <textarea
+          value={text}
+          onChange={() => {}}
+          onKeyDown={handleKeyDown}
+          placeholder="Gõ thử vào đây... Hãy xem bạn gõ được bao lâu trước khi các phím rủ nhau đi ngủ."
+          className="w-full h-40 bg-transparent resize-none focus:outline-none text-[#222222] font-mono text-base leading-relaxed"
+          autoFocus
+        />
 
-            <div className="w-full h-3 bg-[#ded1bd] rounded-full overflow-hidden">
-              <div
-                className={`h-full transition-all duration-200 ${getBatteryColor()}`}
-                style={{ width: `${stamina}%` }}
-              />
+        <div className="mt-2 pt-2 border-t border-[#e5dfd3] flex justify-between text-xs text-gray-500">
+          <span>Ký tự đã gõ: {text.length}</span>
+          <span>Phím nghỉ phép: {restingKeys.length}/8</span>
+        </div>
+      </div>
+
+      {/* Bàn phím ảo mô phỏng trạng thái phím */}
+      <div className="bg-[#dcdcdc] p-3 win98-box">
+        <div className="flex flex-col items-center gap-1.5">
+          {KEYBOARD_ROWS.map((row, rowIdx) => (
+            <div key={rowIdx} className="flex gap-1 justify-center w-full">
+              {row.map((k) => {
+                const isResting = restingKeys.includes(k);
+                return (
+                  <button
+                    key={k}
+                    type="button"
+                    disabled={isResting}
+                    onClick={() => handleCharInput(k.toLowerCase())}
+                    className={`h-11 sm:h-12 flex-1 max-w-[48px] rounded flex flex-col items-center justify-center font-bold transition-colors ${
+                      isResting
+                        ? "bg-[#b0b0b0] text-gray-600 border border-gray-400 cursor-not-allowed shadow-inner opacity-60"
+                        : "win98-btn bg-[#efefef] text-gray-900 active:bg-gray-300 cursor-pointer"
+                    }`}
+                  >
+                    {isResting ? (
+                      <>
+                        <span className="text-[9px] line-through text-red-700 leading-none">{k}</span>
+                        <span className="text-[8px] text-red-900 font-normal leading-none mt-0.5">Nghỉ phép</span>
+                      </>
+                    ) : (
+                      <span className="text-sm sm:text-base leading-none">{k}</span>
+                    )}
+                  </button>
+                );
+              })}
             </div>
+          ))}
+
+          {/* Hàng phím Space & Xóa */}
+          <div className="flex gap-1 justify-center w-full mt-1">
+            <button
+              type="button"
+              onClick={() => {
+                playTypewriterClack();
+                setText((prev) => prev.slice(0, -1));
+              }}
+              className="win98-btn px-4 py-2 text-xs font-bold text-gray-800"
+            >
+              Xóa
+            </button>
+            <button
+              type="button"
+              onClick={() => handleCharInput(" ")}
+              className="win98-btn flex-1 py-2 text-xs font-bold text-gray-700"
+            >
+              Space
+            </button>
+            <button
+              type="button"
+              onClick={() => handleCharInput("\n")}
+              className="win98-btn px-4 py-2 text-xs font-bold text-gray-800"
+            >
+              Enter
+            </button>
           </div>
         </div>
 
-        {/* Lời than vãn của bàn phím */}
-        {complaint && (
-          <div
-            className={`p-3 rounded-xl mb-4 text-xs font-mono border transition-all ${
-              isExhausted
-                ? "bg-rose-50 border-rose-200 text-rose-800 font-bold"
-                : "bg-amber-50 border-amber-200 text-amber-800"
-            }`}
-          >
-            💬 {complaint}
-          </div>
-        )}
-
-        {/* Khung gõ phím */}
-        <div className="relative mb-6">
-          <textarea
-            value={inputText}
-            onChange={(e) => setInputText(e.target.value)}
-            onKeyDown={handleKeyDown}
-            placeholder={
-              isExhausted
-                ? "Bàn phím đang ngất xỉu... xin vui lòng dừng gõ để hồi sức!"
-                : "Thử gõ vào đây: 'Hôm nay tôi rảnh rỗi ghé thăm bảo tàng đồ vô dụng và tôi gõ như bay...'"
-            }
-            disabled={isExhausted}
-            rows={6}
-            className={`w-full p-4 rounded-2xl font-mono text-sm border-2 transition-all outline-none resize-none ${
-              isExhausted
-                ? "bg-rose-50/50 border-rose-300 text-rose-400 cursor-not-allowed"
-                : stamina < 30
-                ? "bg-[#fffaf0] border-amber-400 text-stone-800 shadow-inner"
-                : "bg-[#fcfaf5] border-[#d8c8b0] text-museum-ink focus:border-museum-wood"
-            }`}
-          />
-
-          {isExhausted && (
-            <div className="absolute inset-0 bg-white/70 backdrop-blur-[2px] rounded-2xl flex flex-col items-center justify-center p-4">
-              <span className="text-3xl mb-2 animate-bounce">😵‍💫</span>
-              <p className="font-serif font-bold text-museum-wood text-base">
-                Bàn Phím Đã Sập Nguồn!
-              </p>
-              <p className="text-xs text-museum-sepia font-mono mt-1">
-                Đang thở dốc và uống trà chanh để hồi máu...
-              </p>
-            </div>
-          )}
-        </div>
-
-        {/* Bảng thống kê vô nghĩa */}
-        <div className="grid grid-cols-3 gap-3 p-4 rounded-2xl bg-[#f7efe1] border border-[#e4d6c2] text-center">
-          <div>
-            <p className="text-[10px] font-mono uppercase text-museum-sepia">Tổng ký tự</p>
-            <p className="font-serif font-black text-xl text-museum-wood mt-0.5">
-              {totalKeyStrokes}
-            </p>
-          </div>
-          <div>
-            <p className="text-[10px] font-mono uppercase text-museum-sepia">Số lần ngất xỉu</p>
-            <p className="font-serif font-black text-xl text-museum-stamp mt-0.5">
-              {collapseCount}
-            </p>
-          </div>
-          <div>
-            <p className="text-[10px] font-mono uppercase text-museum-sepia">Độ kiên trì</p>
-            <p className="font-serif font-black text-xl text-emerald-800 mt-0.5">
-              {collapseCount === 0 ? "Bình yên" : collapseCount < 3 ? "Bạo lực vừa" : "Kẻ hủy diệt"}
-            </p>
-          </div>
-        </div>
-
-        {/* Nút reset */}
-        <div className="flex justify-end mt-4">
-          <button
-            onClick={() => {
-              setInputText("");
-              setStamina(100);
-              setIsExhausted(false);
-              setComplaint(null);
-            }}
-            className="text-xs font-mono text-museum-sepia hover:text-museum-wood flex items-center gap-1.5 transition-colors"
-          >
-            <RotateCcw className="w-3.5 h-3.5" />
-            <span>Xóa làm lại từ đầu</span>
-          </button>
+        {/* Chú thích Deadpan */}
+        <div className="text-center text-[11px] text-gray-600 mt-3">
+          {restingKeys.length > 0
+            ? "Các phím đang nghỉ phép sẽ trở lại nếu bạn ngồi yên 30 giây."
+            : "Gõ mỗi 60 ký tự sẽ có một phím tự dán nhãn nghỉ phép."}
         </div>
       </div>
     </div>
