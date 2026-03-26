@@ -528,6 +528,253 @@ export default function Win98Desktop() {
           <div className="win98-titlebar">
             <div className="flex items-center gap-1.5">
               <span>📜</span>
-</main>
-</div>;
+              <span className="truncate">ChungNhan.exe — [Giấy Chứng Nhận Vô Dụng]</span>
+            </div>
+            <button 
+              onClick={() => setIsCertificateOpen(false)}
+              className="win98-btn w-4 h-4 text-black text-[10px] font-bold flex items-center justify-center"
+            >
+              <X className="w-2.5 h-2.5" />
+            </button>
+          </div>
+
+          <div className="p-4 bg-[#c0c0c0]">
+            <div className="mb-3 flex items-center gap-2">
+              <label className="text-[11px] font-bold text-gray-800 whitespace-nowrap">
+                Tên khách tham quan:
+              </label>
+              <input
+                type="text"
+                value={visitorName}
+                onChange={(e) => setVisitorName(e.target.value)}
+                maxLength={30}
+                className="flex-1 bg-white win98-window-sunken px-2 py-1 text-xs focus:outline-none"
+                placeholder="Nhập tên của bạn..."
+              />
+            </div>
+
+            {/* Canvas render giấy khen */}
+            <div className="flex justify-center mb-3 overflow-hidden">
+              <canvas
+                ref={canvasRef}
+                width={500}
+                height={300}
+                className="win98-window-sunken max-w-full h-auto bg-[#faf6ed]"
+              />
+            </div>
+
+            <div className="flex justify-between items-center pt-2 border-t border-gray-400">
+              <span className="text-[11px] text-gray-600">
+                Đã ghé thăm: {visitedCount}/15 phòng
+              </span>
+              <div className="flex gap-2">
+                <button
+                  onClick={handleDownloadCertificate}
+                  className="win98-btn px-3 py-1.5 font-bold flex items-center gap-1.5 text-blue-900"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  <span>Tải Ảnh PNG</span>
+                </button>
+                <button
+                  onClick={() => setIsCertificateOpen(false)}
+                  className="win98-btn px-4 py-1.5"
+                >
+                  Đóng
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Cửa sổ Alert Win98 khi bấm phòng chưa mở hoặc lỗi */}
+      {alertMessage && (
+        <div 
+          className="fixed inset-0 bg-black/30 backdrop-blur-[1px] flex items-center justify-center p-4 z-50"
+          onClick={() => setAlertMessage(null)}
+        >
+          <div 
+            className="win98-box w-full max-w-md shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="win98-titlebar text-xs">
+              <div className="flex items-center gap-1.5">
+                <span>⚠️</span>
+                <span>Thông Báo Hệ Thống</span>
+              </div>
+              <button 
+                onClick={() => setAlertMessage(null)}
+                className="win98-btn w-4 h-4 text-black text-[10px] font-bold flex items-center justify-center"
+              >
+                <X className="w-2.5 h-2.5" />
+              </button>
+            </div>
+
+            <div className="p-4 bg-[#c0c0c0] text-xs font-mono">
+              <div className="flex gap-3 mb-4">
+                <span className="text-3xl">💾</span>
+                <p className="whitespace-pre-line leading-relaxed text-black">
+                  {alertMessage}
+                </p>
+              </div>
+
+              <div className="flex justify-end gap-2 pt-2 border-t border-gray-400">
+                <button
+                  onClick={() => setAlertMessage(null)}
+                  className="win98-btn px-5 py-1.5 font-bold text-xs"
+                >
+                  OK
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Pop-up Start Menu */}
+      {isStartOpen && (
+        <div 
+          className="fixed bottom-10 left-0 w-64 win98-box z-50 shadow-2xl font-mono text-xs"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="flex">
+            <div className="w-8 bg-gradient-to-t from-[#000080] to-[#1084d0] text-white flex items-end justify-center pb-3 font-bold tracking-widest uppercase select-none">
+              <span className="transform -rotate-90 origin-center whitespace-nowrap text-xs">
+                Windows 98
+              </span>
+            </div>
+
+            <div className="flex-1 py-1 bg-[#c0c0c0]">
+              <button
+                onClick={handleRandomRoom}
+                className="w-full text-left px-3 py-2 hover:bg-[#000080] hover:text-white flex items-center gap-2.5 transition-colors"
+              >
+                <Dices className="w-4 h-4 text-amber-500" />
+                <span className="font-bold">Phòng Ngẫu Nhiên (Run...)</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  setIsStartOpen(false);
+                  setIsCertificateOpen(true);
+                }}
+                className="w-full text-left px-3 py-2 hover:bg-[#000080] hover:text-white flex items-center gap-2.5 transition-colors"
+              >
+                <Award className="w-4 h-4 text-amber-600" />
+                <span>Giấy Chứng Nhận Vô Dụng</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  setIsStartOpen(false);
+                  setIsGiftShopOpen(true);
+                }}
+                className="w-full text-left px-3 py-2 hover:bg-[#000080] hover:text-white flex items-center gap-2.5 transition-colors"
+              >
+                <ShoppingBag className="w-4 h-4 text-emerald-600" />
+                <span>Cửa Hàng Lưu Niệm</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  setIsStartOpen(false);
+                  setIsWelcomeOpen(true);
+                }}
+                className="w-full text-left px-3 py-2 hover:bg-[#000080] hover:text-white flex items-center gap-2.5 transition-colors"
+              >
+                <Folder className="w-4 h-4 text-yellow-600" />
+                <span>Mở Sơ Đồ Bảo Tàng</span>
+              </button>
+
+              <a
+                href="https://github.com/pie-12/useless-museum"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full text-left px-3 py-2 hover:bg-[#000080] hover:text-white flex items-center gap-2.5 transition-colors block"
+              >
+                <Terminal className="w-4 h-4 text-emerald-600" />
+                <span>Mã Nguồn (GitHub)</span>
+              </a>
+
+              <div className="my-1 border-t border-gray-400 border-b border-white" />
+
+              <button
+                onClick={() => {
+                  setIsStartOpen(false);
+                  setAlertMessage("Bạn bấm Shut Down thật à?\n\nKhông có nút tắt máy nào ở đây đâu, quay lại làm việc hoặc ghé mấy phòng kia chơi tiếp đi bạn ơi!");
+                }}
+                className="w-full text-left px-3 py-2 hover:bg-[#000080] hover:text-white flex items-center gap-2.5 transition-colors"
+              >
+                <Power className="w-4 h-4 text-rose-600" />
+                <span>Tắt Máy (Shut Down...)</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Bong bóng thoại của Bác bảo vệ ngủ gật */}
+      {guardBubble && (
+        <div className="fixed bottom-12 left-24 z-50 bg-[#ffffcc] border-2 border-black p-2.5 shadow-2xl rounded font-mono text-xs max-w-xs animate-in fade-in zoom-in-95">
+          <p className="font-bold text-black leading-tight">👮‍♂️ Bác bảo vệ:</p>
+          <p className="text-[#333333] mt-1">{guardBubble}</p>
+        </div>
+      )}
+
+      {/* Taskbar Windows 98 cố định dưới đáy màn hình */}
+      <footer className="fixed bottom-0 left-0 right-0 h-10 win98-box z-40 flex items-center justify-between px-1 font-mono text-xs select-none">
+        {/* Nút Start & Bác bảo vệ */}
+        <div className="flex items-center gap-1.5 h-full py-0.5">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsStartOpen(!isStartOpen);
+            }}
+            className={`win98-btn h-full px-2.5 flex items-center gap-1.5 font-black text-xs ${
+              isStartOpen ? "win98-btn-pressed" : ""
+            }`}
+          >
+            <span className="text-base">🪟</span>
+            <span>Start</span>
+          </button>
+
+          {/* Bác bảo vệ ngủ gật (The Slumbering Guard) */}
+          <button
+            onClick={handleGuardClick}
+            title="Bác bảo vệ bảo tàng (đang ngủ gật)"
+            className="win98-btn h-full px-2 flex items-center gap-1 text-[11px] hover:bg-gray-200 active:bg-gray-300"
+          >
+            <span>👮‍♂️</span>
+            <span className="text-[10px] text-gray-600 font-bold">zzz</span>
+          </button>
+
+          {/* Nút Tab trên Taskbar */}
+          <button
+            onClick={() => setIsWelcomeOpen(!isWelcomeOpen)}
+            className={`win98-btn h-full px-3 max-w-[180px] sm:max-w-[220px] truncate text-[11px] hidden xs:flex items-center gap-1.5 ${
+              isWelcomeOpen ? "win98-btn-pressed font-bold" : ""
+            }`}
+          >
+            <span>📁</span>
+            <span className="truncate">Bảo Tàng Đồ Vô Dụng</span>
+          </button>
+        </div>
+
+        {/* System Tray (Đồng hồ & Loa & Thông báo) */}
+        <div className="win98-window-sunken h-full py-0.5 px-2.5 flex items-center gap-2 bg-[#c0c0c0]">
+          <button
+            onClick={() => setIsCertificateOpen(true)}
+            title="Xem Giấy Chứng Nhận Vô Dụng"
+            className="hover:opacity-80"
+          >
+            📜
+          </button>
+          <Volume2 className="w-3.5 h-3.5 text-gray-700" />
+          <span className="text-xs font-bold text-black">
+            {currentTime || "12:00"}
+          </span>
+        </div>
+      </footer>
+    </div>
+  );
 }
