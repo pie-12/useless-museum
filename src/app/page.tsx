@@ -428,6 +428,56 @@ export default function Win98Desktop() {
                 </button>
               </div>
             </div>
+          </div>
+
+          <div className="p-2 bg-[#c0c0c0] flex items-center justify-between text-xs">
+            <span className="text-[11px] text-gray-600">Trạng thái: Sẵn sàng</span>
+            <div className="flex gap-2">
+              <button
+                onClick={handleRandomRoom}
+                className="win98-btn px-3 py-1 font-bold text-xs flex items-center gap-1"
+              >
+                <Dices className="w-3.5 h-3.5" />
+                <span>Phòng Ngẫu Nhiên</span>
+              </button>
+              <button
+                onClick={() => setIsWelcomeOpen(false)}
+                className="win98-btn px-3 py-1 text-xs"
+              >
+                Đóng
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Cửa sổ Cửa hàng lưu niệm không bán gì (CuaHangLuuNiem.exe) */}
+      {isGiftShopOpen && (
+        <div 
+          className="fixed top-20 left-4 sm:left-1/2 sm:-translate-x-1/2 w-[calc(100%-2rem)] sm:w-[480px] win98-box z-30 shadow-2xl font-mono text-xs"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="win98-titlebar">
+            <div className="flex items-center gap-1.5">
+              <span>🛍️</span>
+              <span className="truncate">CuaHangLuuNiem.exe — [Kệ Hàng Triển Lãm]</span>
+            </div>
+            <button 
+              onClick={() => setIsGiftShopOpen(false)}
+              className="win98-btn w-4 h-4 text-black text-[10px] font-bold flex items-center justify-center"
+            >
+              <X className="w-2.5 h-2.5" />
+            </button>
+          </div>
+
+          <div className="p-4 bg-[#c0c0c0]">
+            <div className="bg-white win98-window-sunken p-3 mb-3">
+              <p className="font-bold text-black mb-1">DANH MỤC LƯU NIỆM ĐẶC BIỆT</p>
+              <p className="text-[11px] text-gray-600">
+                Toàn bộ sản phẩm được trưng bày vĩnh viễn và không bao giờ phục vụ thương mại.
+              </p>
+            </div>
+
 </main>
 </div>;
 }
