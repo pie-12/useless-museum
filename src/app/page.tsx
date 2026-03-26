@@ -478,6 +478,56 @@ export default function Win98Desktop() {
               </p>
             </div>
 
+            <div className="space-y-2">
+              {GIFT_ITEMS.map((item) => {
+                const isSoldOut = soldOutItems.includes(item.id);
+                return (
+                  <div 
+                    key={item.id}
+                    className="bg-[#dcdcdc] p-2.5 border border-gray-400 flex items-center justify-between"
+                  >
+                    <div className="flex items-center gap-2">
+                      <span className="text-xl">{item.icon}</span>
+                      <div>
+                        <p className="font-bold text-gray-900">{item.name}</p>
+                        <p className="text-[10px] text-gray-500">Giá: {item.price}</p>
+                      </div>
+                    </div>
+
+                    <button
+                      onClick={() => handleBuyGift(item.id)}
+                      className={`win98-btn px-3 py-1 text-xs font-bold ${
+                        isSoldOut ? "text-gray-500 bg-gray-300 shadow-inner" : "text-black"
+                      }`}
+                    >
+                      {isSoldOut ? "[ Hết hàng ]" : "[ Mua ]"}
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="mt-4 pt-2 border-t border-gray-400 flex justify-end">
+              <button
+                onClick={() => setIsGiftShopOpen(false)}
+                className="win98-btn px-4 py-1.5 font-bold"
+              >
+                Đóng cửa hàng
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Cửa sổ Giấy Chứng Nhận Vô Dụng (ChungNhan.exe) */}
+      {isCertificateOpen && (
+        <div 
+          className="fixed top-14 left-4 sm:left-1/2 sm:-translate-x-1/2 w-[calc(100%-2rem)] sm:w-[540px] win98-box z-30 shadow-2xl font-mono text-xs"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="win98-titlebar">
+            <div className="flex items-center gap-1.5">
+              <span>📜</span>
 </main>
 </div>;
 }
