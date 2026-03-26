@@ -378,6 +378,56 @@ export default function Win98Desktop() {
             <span className="underline cursor-pointer">X</span>em
             <span className="underline cursor-pointer">T</span>rợ giúp
           </div>
+
+          <div className="p-4 bg-[#ffffff] win98-window-sunken m-2 text-xs font-mono space-y-3 max-h-[60vh] overflow-y-auto">
+            <div className="border-b border-gray-200 pb-2">
+              <h1 className="font-bold text-sm text-[#000080]">
+                BẢO TÀNG ĐỒ VÔ DỤNG (WINDOWS 98 EDITION)
+              </h1>
+              <p className="text-gray-500 text-[11px] mt-0.5">
+                Phiên bản: 4.10.1998 • Lấy cảm hứng từ The Useless Web
+              </p>
+            </div>
+
+            <p className="leading-relaxed text-gray-800">
+              Đây là một web bảo tàng vô dụng. Bấm vào thì xem, không giải quyết vấn đề gì cả.
+            </p>
+
+            <div className="bg-[#f0f0f0] p-2.5 border border-gray-300 text-gray-700 space-y-1">
+              <p className="font-bold text-black">THAO TÁC:</p>
+              <p>• Nháy đúp biểu tượng để vào phòng.</p>
+              <p>• Trên điện thoại: Nhấp vào biểu tượng rồi bấm nút.</p>
+              <p>• Bấm nút <b>"Start"</b> để nhảy ngẫu nhiên.</p>
+            </div>
+
+            <div>
+              <p className="font-bold text-emerald-800 mb-1">
+                CÁC PHÒNG ĐANG MỞ CỬA:
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1">
+                <button
+                  onClick={() => handleOpenRoom("vague-clock")}
+                  className="win98-btn p-2 text-left text-[11px] hover:bg-gray-100 flex items-center gap-1.5"
+                >
+                  <span>🕰️</span>
+                  <span className="truncate">Đồng Hồ Mơ Hồ</span>
+                </button>
+                <button
+                  onClick={() => handleOpenRoom("tired-keyboard")}
+                  className="win98-btn p-2 text-left text-[11px] hover:bg-gray-100 flex items-center gap-1.5"
+                >
+                  <span>⌨️</span>
+                  <span className="truncate">Bàn Phím Mệt</span>
+                </button>
+                <button
+                  onClick={() => handleOpenRoom("useless-converter")}
+                  className="win98-btn p-2 text-left text-[11px] hover:bg-gray-100 flex items-center gap-1.5"
+                >
+                  <span>📏</span>
+                  <span className="truncate">Đổi Đơn Vị</span>
+                </button>
+              </div>
+            </div>
 </main>
 </div>;
 }
