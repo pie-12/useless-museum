@@ -198,6 +198,66 @@ export default function Win98Desktop() {
   const handleGuardClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     playMechanicalClick();
+    const nextIdx = (guardPhraseIdx + 1) % GUARD_PHRASES.length;
+    setGuardPhraseIdx(nextIdx);
+    setGuardBubble(GUARD_PHRASES[guardPhraseIdx]);
+    setTimeout(() => {
+      setGuardBubble(null);
+    }, 3500);
+  };
+
+  const handleBuyGift = (itemId: string) => {
+    playCalculatorBeep();
+    if (!soldOutItems.includes(itemId)) {
+      setSoldOutItems((prev) => [...prev, itemId]);
+    }
+  };
+
+  const getIconForRoom = (index: number) => {
+    switch (index) {
+      case 1: return "🔘";
+      case 2: return "🕰️";
+      case 3: return "📏";
+      case 4: return "📝";
+      case 5: return "☕";
+      case 6: return "💺";
+      case 7: return "👾";
+      case 8: return "📜";
+      case 9: return "🎵";
+      case 10: return "⌨️";
+      case 11: return "🪴";
+      case 12: return "📜";
+      case 13: return "🚗";
+      case 14: return "💬";
+      case 15: return "🐛";
+      default: return "💾";
+    }
+  };
+
+  return (
+    <div 
+      className="min-h-screen bg-[#008080] text-black font-sans relative overflow-hidden pb-12 select-none"
+      onClick={() => {
+        if (isStartOpen) setIsStartOpen(false);
+      }}
+    >
+      {/* Vùng Desktop Icons */}
+      <main className="p-3 sm:p-6 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4 sm:gap-6 z-10 relative">
+        {/* Icon My Computer / Cửa sổ chính */}
+        <div
+          onClick={(e) => {
+            e.stopPropagation();
+            setSelectedIcon("computer");
+          }}
+          onDoubleClick={(e) => {
+            e.stopPropagation();
+            setIsWelcomeOpen(true);
+          }}
+          className={`flex flex-col items-center justify-center p-2 rounded cursor-pointer text-center w-24 sm:w-28 group transition-colors ${
+            selectedIcon === "computer" ? "bg-[#000080]/80 text-white" : "hover:bg-white/10 text-white"
+          }`}
+        >
+          <div className="text-3xl sm:text-4xl mb-1 filter drop-shadow">🖥️</div>
 </main>
 </div>;
 }
