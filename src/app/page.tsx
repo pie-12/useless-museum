@@ -258,6 +258,66 @@ export default function Win98Desktop() {
           }`}
         >
           <div className="text-3xl sm:text-4xl mb-1 filter drop-shadow">🖥️</div>
+          <span className="text-[11px] sm:text-xs font-mono font-medium leading-tight px-1 rounded break-words">
+            Bảo Tàng (C:)
+          </span>
+        </div>
+
+        {/* Cửa hàng lưu niệm không bán gì (CuaHangLuuNiem.exe) */}
+        <div
+          onClick={(e) => {
+            e.stopPropagation();
+            setSelectedIcon("giftshop");
+          }}
+          onDoubleClick={(e) => {
+            e.stopPropagation();
+            setIsGiftShopOpen(true);
+          }}
+          className={`flex flex-col items-center justify-center p-2 rounded cursor-pointer text-center w-24 sm:w-28 group transition-colors ${
+            selectedIcon === "giftshop" ? "bg-[#000080]/80 text-white" : "hover:bg-white/10 text-white"
+          }`}
+        >
+          <div className="text-3xl sm:text-4xl mb-1 filter drop-shadow">🛍️</div>
+          <span className="text-[11px] sm:text-xs font-mono font-medium leading-tight px-1 rounded break-words">
+            CuaHangLuuNiem.exe
+          </span>
+        </div>
+
+        {/* Giấy chứng nhận tham quan (ChungNhan.exe) */}
+        <div
+          onClick={(e) => {
+            e.stopPropagation();
+            setSelectedIcon("cert");
+          }}
+          onDoubleClick={(e) => {
+            e.stopPropagation();
+            setIsCertificateOpen(true);
+          }}
+          className={`flex flex-col items-center justify-center p-2 rounded cursor-pointer text-center w-24 sm:w-28 group transition-colors ${
+            selectedIcon === "cert" ? "bg-[#000080]/80 text-white" : "hover:bg-white/10 text-white"
+          }`}
+        >
+          <div className="text-3xl sm:text-4xl mb-1 filter drop-shadow relative">
+            📜
+            {visitedCount >= 3 && (
+              <span className="absolute -top-1 -right-1 text-xs">★</span>
+            )}
+          </div>
+          <span className="text-[11px] sm:text-xs font-mono font-medium leading-tight px-1 rounded break-words">
+            ChungNhan.exe
+          </span>
+        </div>
+
+        {/* 15 Icon của 15 phòng bảo tàng */}
+        {MUSEUM_ROOMS.map((room) => {
+          const isSelected = selectedIcon === room.id;
+          const isOpen = room.status === "open";
+
+          return (
+            <div
+              key={room.id}
+              onClick={(e) => {
+                e.stopPropagation();
 </main>
 </div>;
 }
