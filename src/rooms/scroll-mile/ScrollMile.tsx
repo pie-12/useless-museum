@@ -73,5 +73,40 @@ export function ScrollMile() {
       window.removeEventListener("wheel", handleWheel);
       window.removeEventListener("touchstart", handleTouchStart);
       window.removeEventListener("touchmove", handleTouchMove);
+    };
+  }, []);
+
+  // Format odometer digits (e.g., 00123.4)
+  const integerPart = Math.floor(meters);
+  const decimalPart = Math.floor((meters % 1) * 10);
+  const intStr = integerPart.toString().padStart(5, "0").slice(-5);
+
+  return (
+    <div 
+      ref={containerRef}
+      className="w-full max-w-xl mx-auto py-8 px-4 select-none font-mono flex flex-col items-center justify-center text-center"
+    >
+      {/* Vỏ mặt đồng hồ công-tơ-mét kiểu Honda Super Cub 50cc */}
+      <div className="relative w-72 sm:w-80 bg-gradient-to-b from-[#222222] via-[#111111] to-[#2c2c2c] p-6 rounded-3xl border-4 border-[#888888] shadow-2xl flex flex-col items-center">
+        {/* Vòng bezel mạ chrome */}
+        <div className="absolute inset-1 rounded-[22px] border border-gray-500 pointer-events-none opacity-40" />
+
+        <div className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-3">
+          HONDA CUB 50cc • ODOMETER
+        </div>
+
+        {/* Cụm con lăn hiển thị quãng đường cuộn */}
+        <div className="flex items-center justify-center bg-black p-2 rounded-lg border-2 border-gray-600 shadow-inner gap-1 mb-4">
+          {/* Các con số hàng nghìn, trăm, chục, đơn vị (đen chữ trắng) */}
+          {intStr.split("").map((digit, idx) => (
+            <div
+              key={idx}
+              className="w-7 h-10 bg-[#1c1c1c] border border-gray-700 rounded flex items-center justify-center text-xl font-black text-white shadow-inner"
+            >
+              {digit}
+            </div>
+          ))}
+
+          {/* Dấu chấm ngăn cách */}
 return <div>Đồng hồ cây số...</div>;
 }
