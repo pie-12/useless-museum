@@ -101,7 +101,7 @@ export const MUSEUM_ROOMS: RoomMetadata[] = [
     description: "Đồng hồ công-tơ-mét đo chiều dài ngón tay cuộn.",
     category: "client-only",
     styleTheme: "vintage",
-    status: "coming-soon",
+    status: "open",
     author: "Cục Đo Lường Ngón Trỏ",
     tags: ["Cuộn chuột", "Kỷ lục", "Địa danh"],
   },

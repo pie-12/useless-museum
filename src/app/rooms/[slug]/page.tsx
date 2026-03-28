@@ -4,6 +4,7 @@ import { MUSEUM_ROOMS } from "@/config/rooms.config";
 import { VagueClock } from "@/rooms/vague-clock/VagueClock";
 import { TiredKeyboard } from "@/rooms/tired-keyboard/TiredKeyboard";
 import { UselessConverter } from "@/rooms/useless-converter/UselessConverter";
+import { ScrollMile } from "@/rooms/scroll-mile/ScrollMile";
 import { ArrowLeft, Dices, Hammer, Sparkles, Tag, Minus, Square, X } from "lucide-react";
 
 interface RoomPageProps {
@@ -35,6 +36,8 @@ export default async function RoomPage({ params }: RoomPageProps) {
         return <TiredKeyboard />;
       case "useless-converter":
         return <UselessConverter />;
+      case "scroll-mile":
+        return <ScrollMile />;
       default:
         return (
           <div className="max-w-xl mx-auto my-12 px-4 text-center">
