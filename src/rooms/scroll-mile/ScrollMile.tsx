@@ -108,5 +108,40 @@ export function ScrollMile() {
           ))}
 
           {/* Dấu chấm ngăn cách */}
+          <span className="text-xl font-black text-white px-0.5">.</span>
+
+          {/* Con số hàng thập phân (trắng chữ đỏ kiểu xe máy) */}
+          <div className="w-7 h-10 bg-[#f0f0f0] border border-gray-300 rounded flex items-center justify-center text-xl font-black text-red-600 shadow-inner">
+            {decimalPart}
+          </div>
+
+          <span className="text-xs font-bold text-gray-400 ml-1">m</span>
+        </div>
+
+        {/* Kim tốc độ giả lập */}
+        <div className="text-[11px] text-gray-400">
+          Tốc độ dịch chuyển: <span className="text-emerald-400 font-bold">0 km/h</span>
+        </div>
+      </div>
+
+      {/* Dòng kết luận Deadpan */}
+      <div className="mt-8 min-h-[4rem] flex flex-col items-center justify-center">
+        <p className="text-xl sm:text-2xl font-bold text-black tracking-tight">
+          Bạn đã cuộn {meters >= 10 ? meters.toFixed(1) : meters.toFixed(2)} m mà vẫn ngồi nguyên chỗ cũ.
+        </p>
+        <p className="text-xs text-gray-600 mt-2">
+          (Cuộn con lăn chuột hoặc vuốt màn hình để tiếp tục đo)
+        </p>
+      </div>
+
+      {/* Bảng so sánh mốc địa danh Đà Nẵng */}
+      <div className="w-full mt-6 bg-[#dcdcdc] p-3 win98-box text-left">
+        <p className="text-xs font-bold text-black mb-2 border-b border-gray-400 pb-1">
+          CÁC CỘT MỐC ĐỊA DANH ĐÃ VƯỢT QUA:
+        </p>
+        <div className="space-y-1.5 text-xs">
+          {LANDMARKS.map((lm) => {
+            const passed = meters >= lm.dist;
+            return (
 return <div>Đồng hồ cây số...</div>;
 }
