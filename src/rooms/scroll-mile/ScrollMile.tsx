@@ -38,5 +38,40 @@ export function ScrollMile() {
       } catch {
         // Ignore storage errors
       }
+
+      // Play tick sound every ~0.5 meters of scrolling
+      if (next - lastTickDist.current > 0.5) {
+        lastTickDist.current = next;
+        playClockTick();
+      }
+
+      return next;
+    });
+  };
+
+  useEffect(() => {
+    const handleWheel = (e: WheelEvent) => {
+      addScrollDistance(e.deltaY);
+    };
+
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartY.current = e.touches[0].clientY;
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      const currentY = e.touches[0].clientY;
+      const delta = touchStartY.current - currentY;
+      touchStartY.current = currentY;
+      addScrollDistance(delta * 1.5);
+    };
+
+    window.addEventListener("wheel", handleWheel, { passive: true });
+    window.addEventListener("touchstart", handleTouchStart, { passive: true });
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
+
+    return () => {
+      window.removeEventListener("wheel", handleWheel);
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchmove", handleTouchMove);
 return <div>Đồng hồ cây số...</div>;
 }
