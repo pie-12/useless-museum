@@ -143,5 +143,36 @@ export function ScrollMile() {
           {LANDMARKS.map((lm) => {
             const passed = meters >= lm.dist;
             return (
-return <div>Đồng hồ cây số...</div>;
+              <div key={lm.name} className="flex items-center justify-between text-gray-800">
+                <span className="flex items-center gap-1.5">
+                  <span className={passed ? "text-emerald-600 font-bold" : "text-gray-400"}>
+                    {passed ? "✓" : "○"}
+                  </span>
+                  <span>{lm.name} ({lm.dist.toLocaleString("vi-VN")} m)</span>
+                </span>
+                <span className={`text-[10px] font-bold ${passed ? "text-emerald-700" : "text-gray-500"}`}>
+                  {passed ? "[ĐÃ ĐẠT]" : `còn ${(lm.dist - meters).toFixed(1)} m`}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Nút reset đồng hồ */}
+      <button
+        onClick={() => {
+          setMeters(0);
+          try {
+            localStorage.setItem("scroll_odometer_meters", "0");
+          } catch {
+            // Ignore
+          }
+        }}
+        className="win98-btn mt-4 px-3 py-1 text-xs text-gray-700"
+      >
+        Về số 0 (Reset)
+      </button>
+    </div>
+  );
 }
