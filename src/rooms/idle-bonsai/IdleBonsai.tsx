@@ -93,5 +93,50 @@ export function IdleBonsai() {
           <path
             d="M 87 115 Q 60 105 45 95"
             fill="none"
+            stroke="#5c3a21"
+            strokeWidth="7"
+            strokeLinecap="round"
+          />
+          {/* Nhánh phải */}
+          <path
+            d="M 95 80 Q 125 75 145 65"
+            fill="none"
+            stroke="#5c3a21"
+            strokeWidth="6"
+            strokeLinecap="round"
+          />
+
+          {/* Lá 1 (Mọc lúc 15s) - Cành trái */}
+          {leavesCount >= 1 && (
+            <ellipse
+              cx="40"
+              cy="92"
+              rx="12"
+              ry="7"
+              fill="#2e7d32"
+              transform="rotate(-20 40 92)"
+            />
+          )}
+
+          {/* Lá 2 (Mọc lúc 30s) - Cành phải */}
+          {leavesCount >= 2 && (
+            <ellipse
+              cx="148"
+              cy="62"
+              rx="12"
+              ry="7"
+              fill="#388e3c"
+              transform="rotate(25 148 62)"
+            />
+          )}
+
+          {/* Lá 3 (Mọc lúc 45s) - Đỉnh cành giữa */}
+          {leavesCount >= 3 && (
+            <ellipse
+              cx="112"
+              cy="30"
+              rx="13"
+              ry="8"
+              fill="#43a047"
 return <div>Cây bonsai...</div>;
 }
