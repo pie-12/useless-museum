@@ -140,7 +140,7 @@ export const MUSEUM_ROOMS: RoomMetadata[] = [
     description: "Không đụng chuột cây mới nở hoa.",
     category: "client-only",
     styleTheme: "zen",
-    status: "coming-soon",
+    status: "open",
     author: "Thiền Viện Lười Biếng",
     tags: ["Idle", "Zen", "Bình tâm"],
   },
