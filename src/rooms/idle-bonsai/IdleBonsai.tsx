@@ -48,5 +48,50 @@ export function IdleBonsai() {
     // Only react if previously was idle for at least 3 seconds
     if (now - lastMovedAtRef.current >= 3000) {
       if (leavesCountRef.current > 0 || hasFlowerRef.current) {
+        playClockTick();
+        setFallenLeaves((prev) => prev + 1);
+      }
+      setStatusText("Lại nhúc nhích rồi.");
+      setLeavesCount(0);
+      setHasFlower(false);
+      setIdleSeconds(0);
+    }
+    lastMovedAtRef.current = now;
+  };
+
+  useEffect(() => {
+    window.addEventListener("mousemove", handleUserMovement, { passive: true });
+    window.addEventListener("keydown", handleUserMovement, { passive: true });
+    window.addEventListener("touchstart", handleUserMovement, { passive: true });
+    window.addEventListener("wheel", handleUserMovement, { passive: true });
+    window.addEventListener("scroll", handleUserMovement, { passive: true });
+
+    return () => {
+      window.removeEventListener("mousemove", handleUserMovement);
+      window.removeEventListener("keydown", handleUserMovement);
+      window.removeEventListener("touchstart", handleUserMovement);
+      window.removeEventListener("wheel", handleUserMovement);
+      window.removeEventListener("scroll", handleUserMovement);
+    };
+  }, []);
+
+  return (
+    <div className="w-full max-w-lg mx-auto py-8 px-4 select-none font-mono flex flex-col items-center justify-center text-center">
+      {/* Khung chậu cây Zen */}
+      <div className="w-72 h-80 bg-[#f4f2ec] rounded-2xl border-2 border-[#d5cfc0] shadow-md p-4 flex flex-col items-center justify-end relative overflow-hidden">
+        {/* SVG Cây Bonsai */}
+        <svg viewBox="0 0 200 220" className="w-56 h-64">
+          {/* Thân cây gỗ uốn lượn */}
+          <path
+            d="M 95 180 Q 98 140 85 110 Q 75 85 100 65 Q 120 50 115 35"
+            fill="none"
+            stroke="#5c3a21"
+            strokeWidth="12"
+            strokeLinecap="round"
+          />
+          {/* Nhánh trái */}
+          <path
+            d="M 87 115 Q 60 105 45 95"
+            fill="none"
 return <div>Cây bonsai...</div>;
 }
