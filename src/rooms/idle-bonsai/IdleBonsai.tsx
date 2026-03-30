@@ -138,5 +138,45 @@ export function IdleBonsai() {
               rx="13"
               ry="8"
               fill="#43a047"
+              transform="rotate(10 112 30)"
+            />
+          )}
+
+          {/* Lá 4 (Mọc lúc 60s) - Nhánh phụ */}
+          {leavesCount >= 4 && (
+            <ellipse
+              cx="75"
+              cy="75"
+              rx="11"
+              ry="6"
+              fill="#4caf50"
+              transform="rotate(-35 75 75)"
+            />
+          )}
+
+          {/* Hoa đỏ bé xíu (Nở lúc 60s) */}
+          {hasFlower && (
+            <circle cx="118" cy="22" r="5" fill="#e53935" />
+          )}
+
+          {/* Lá rụng ở gốc chậu */}
+          {fallenLeaves > 0 && (
+            <ellipse
+              cx="120"
+              cy="182"
+              rx="8"
+              ry="4"
+              fill="#8d6e63"
+              transform="rotate(15 120 182)"
+            />
+          )}
+          {fallenLeaves > 1 && (
+            <ellipse
+              cx="70"
+              cy="183"
+              rx="7"
+              ry="4"
+              fill="#a1887f"
+              transform="rotate(-25 70 183)"
 return <div>Cây bonsai...</div>;
 }
