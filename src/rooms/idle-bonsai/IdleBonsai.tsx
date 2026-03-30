@@ -178,5 +178,50 @@ export function IdleBonsai() {
               ry="4"
               fill="#a1887f"
               transform="rotate(-25 70 183)"
-return <div>Cây bonsai...</div>;
+            />
+          )}
+
+          {/* Chậu gốm bonsai */}
+          <polygon
+            points="50,180 150,180 140,210 60,210"
+            fill="#8d6e63"
+            stroke="#4e342e"
+            strokeWidth="3"
+          />
+          {/* Đĩa lót chậu */}
+          <rect
+            x="45"
+            y="210"
+            width="110"
+            height="7"
+            rx="2"
+            fill="#5d4037"
+          />
+        </svg>
+
+        {/* Đồng hồ đếm giây ngồi yên */}
+        <div className="absolute top-3 right-3 text-[11px] text-gray-500 font-mono">
+          Yên lặng: {idleSeconds}s
+        </div>
+      </div>
+
+      {/* Dòng chữ trạng thái Deadpan */}
+      <div className="mt-8 min-h-[3.5rem] flex flex-col items-center justify-center">
+        <p className="text-2xl sm:text-3xl font-bold text-black tracking-tight">
+          {statusText}
+        </p>
+        <p className="text-xs text-gray-600 mt-2">
+          (Ngồi yên không động chuột 15s để mọc lá • Đã làm rụng {fallenLeaves} lá)
+        </p>
+      </div>
+
+      {/* Bảng quy tắc nhỏ */}
+      <div className="mt-6 bg-[#dcdcdc] p-3 win98-box text-xs text-left w-full text-gray-800">
+        <p className="font-bold text-black mb-1">QUY TẮC PHÒNG THIỀN:</p>
+        <p>• 15s ngồi yên: Mọc 1 lá non.</p>
+        <p>• 60s ngồi yên: Nở 1 nụ hoa đỏ.</p>
+        <p>• Nhúc nhích chuột hoặc bấm phím: Lá rụng về số 0.</p>
+      </div>
+    </div>
+  );
 }
