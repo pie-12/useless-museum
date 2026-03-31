@@ -158,5 +158,50 @@ export function BugQuiz() {
     ctx.textAlign = "center";
     ctx.fillText("THẺ CĂN CƯỚC LỖI • BUG IDENTITY CARD", canvas.width / 2, 35);
 
+    // Avatar box
+    ctx.fillStyle = "#e0e0e0";
+    ctx.fillRect(30, 65, 90, 110);
+    ctx.strokeStyle = "#999999";
+    ctx.lineWidth = 1;
+    ctx.strokeRect(30, 65, 90, 110);
+
+    ctx.font = "42px sans-serif";
+    ctx.fillText("🐛", 75, 135);
+
+    // Info details
+    ctx.textAlign = "left";
+    ctx.fillStyle = "#666666";
+    ctx.font = "10px 'Be Vietnam Pro', monospace";
+    ctx.fillText("HỌ VÀ TÊN:", 135, 80);
+
+    ctx.fillStyle = "#111111";
+    ctx.font = "bold 14px 'Be Vietnam Pro', sans-serif";
+    ctx.fillText(holderName || "Một Lập Trình Viên", 135, 100);
+
+    ctx.fillStyle = "#666666";
+    ctx.font = "10px 'Be Vietnam Pro', monospace";
+    ctx.fillText("BẢN NGÃ LỖI:", 135, 125);
+
+    ctx.fillStyle = resultBug.color;
+    ctx.font = "bold 15px 'Be Vietnam Pro', monospace";
+    ctx.fillText(resultBug.name, 135, 145);
+
+    // Description quote
+    ctx.fillStyle = "#333333";
+    ctx.font = "italic 11px 'Be Vietnam Pro', sans-serif";
+    ctx.fillText(`"${resultBug.desc}"`, 135, 170);
+
+    // Barcode at bottom
+    ctx.fillStyle = "#000000";
+    for (let i = 0; i < 40; i++) {
+      const x = 30 + i * 9;
+      const w = (i % 3 === 0) ? 4 : (i % 2 === 0 ? 2 : 1);
+      ctx.fillRect(x, 195, w, 24);
+    }
+
+    ctx.font = "10px monospace";
+    ctx.textAlign = "right";
+    ctx.fillStyle = "#555555";
+    ctx.fillText(`MÃ SỐ: ${resultBug.code}`, canvas.width - 30, 212);
 return <div>Trắc nghiệm bug...</div>;
 }
