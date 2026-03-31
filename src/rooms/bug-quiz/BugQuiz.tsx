@@ -203,5 +203,45 @@ export function BugQuiz() {
     ctx.textAlign = "right";
     ctx.fillStyle = "#555555";
     ctx.fillText(`MÃ SỐ: ${resultBug.code}`, canvas.width - 30, 212);
+  }, [resultBug, holderName]);
+
+  const handleDownloadCard = () => {
+    if (!canvasRef.current) return;
+    playCalculatorBeep();
+    const link = document.createElement("a");
+    link.download = `the-can-cuoc-bug-${resultBug?.code || "id"}.png`;
+    link.href = canvasRef.current.toDataURL("image/png");
+    link.click();
+  };
+
+  return (
+    <div className="w-full max-w-lg mx-auto py-8 px-4 select-none font-mono flex flex-col items-center justify-center text-center">
+      {/* Khi đang trả lời trắc nghiệm */}
+      {currentStep < QUESTIONS.length ? (
+        <div className="w-full bg-[#f0f0f0] p-6 win98-box shadow-md">
+          {/* Header tiến độ */}
+          <div className="flex justify-between items-center text-xs text-gray-500 pb-2 border-b border-gray-400 mb-4">
+            <span className="font-bold text-black uppercase">Trắc Nghiệm Bản Ngã Bug</span>
+            <span>Câu {currentStep + 1} / {QUESTIONS.length}</span>
+          </div>
+
+          {/* Câu hỏi Deadpan */}
+          <h3 className="text-xl sm:text-2xl font-bold text-black mb-6 text-center">
+            {QUESTIONS[currentStep].q}
+          </h3>
+
+          {/* 3 Lựa chọn cộc lốc */}
+          <div className="space-y-3">
+            {QUESTIONS[currentStep].options.map((opt, idx) => (
+              <button
+                key={idx}
+                onClick={() => handleSelectOption(opt.bugType)}
+                className="w-full win98-btn py-3 px-4 text-left font-bold text-sm sm:text-base hover:bg-gray-100 flex items-center justify-between"
+              >
+                <span>{String.fromCharCode(65 + idx)}. {opt.label}</span>
+                <span className="text-xs text-gray-400 font-normal">→</span>
+              </button>
+            ))}
+          </div>
 return <div>Trắc nghiệm bug...</div>;
 }
