@@ -243,5 +243,56 @@ export function BugQuiz() {
               </button>
             ))}
           </div>
-return <div>Trắc nghiệm bug...</div>;
+        </div>
+      ) : (
+        /* Khi hoàn thành và xuất thẻ căn cước */
+        <div className="w-full bg-[#dcdcdc] p-5 win98-box shadow-md flex flex-col items-center">
+          <div className="w-full text-left text-xs font-bold text-black pb-2 border-b border-gray-400 mb-3 flex items-center justify-between">
+            <span>KẾT QUẢ GIÁM ĐỊNH BẢN THÂN</span>
+            <span className="text-emerald-700">[Hoàn thành]</span>
+          </div>
+
+          {/* Input nhập tên chủ thẻ */}
+          <div className="w-full mb-3 flex items-center gap-2 text-xs">
+            <label className="text-gray-700 font-bold whitespace-nowrap">Tên trên thẻ:</label>
+            <input
+              type="text"
+              value={holderName}
+              onChange={(e) => setHolderName(e.target.value)}
+              maxLength={26}
+              className="flex-1 win98-window-sunken bg-white px-2 py-1 text-xs focus:outline-none"
+            />
+          </div>
+
+          {/* Canvas thẻ căn cước */}
+          <div className="overflow-hidden mb-4 win98-window-sunken">
+            <canvas
+              ref={canvasRef}
+              width={440}
+              height={235}
+              className="max-w-full h-auto"
+            />
+          </div>
+
+          {/* Nút tải ảnh & làm lại */}
+          <div className="w-full flex gap-2 justify-center">
+            <button
+              onClick={handleDownloadCard}
+              className="win98-btn flex-1 py-2 text-xs font-bold flex items-center justify-center gap-1.5 text-blue-900"
+            >
+              <Download className="w-3.5 h-3.5" />
+              <span>Tải Thẻ Căn Cước (PNG)</span>
+            </button>
+            <button
+              onClick={handleRestart}
+              className="win98-btn px-4 py-2 text-xs flex items-center justify-center gap-1 text-gray-700"
+            >
+              <RotateCcw className="w-3.5 h-3.5" />
+              <span>Làm Lại</span>
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 }
