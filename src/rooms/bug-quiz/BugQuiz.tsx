@@ -63,5 +63,55 @@ const BUG_PROFILES: Record<number, BugResult> = {
   1: {
     code: "NPE-001",
     name: "NullPointerException",
+    desc: "Luôn biến mất đúng lúc người khác cần nhất.",
+    color: "#b71c1c",
+  },
+  2: {
+    code: "OBO-002",
+    name: "Off-by-one Error",
+    desc: "Lúc nào cũng đến lệch đúng một bước.",
+    color: "#e65100",
+  },
+  3: {
+    code: "INF-003",
+    name: "Infinite Loop",
+    desc: "Nói đi nói lại một chuyện từ năm này qua năm khác.",
+    color: "#4a148c",
+  },
+  4: {
+    code: "ZIN-004",
+    name: "CSS z-index: 99999",
+    desc: "Cố đè bẹp tất cả nhưng vẫn bị che khuất.",
+    color: "#0d47a1",
+  },
+  5: {
+    code: "RAC-005",
+    name: "Race Condition",
+    desc: "Chạy rất nhanh nhưng không biết mình đang đi đâu.",
+    color: "#004d40",
+  },
+};
+
+export function BugQuiz() {
+  const [currentStep, setCurrentStep] = useState<number>(0);
+  const [answers, setAnswers] = useState<number[]>([]);
+  const [resultBug, setResultBug] = useState<BugResult | null>(null);
+  const [holderName, setHolderName] = useState<string>("Một Lập Trình Viên");
+
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+
+  const handleSelectOption = (bugType: number) => {
+    playMechanicalClick();
+    const nextAnswers = [...answers, bugType];
+    setAnswers(nextAnswers);
+
+    if (currentStep + 1 < QUESTIONS.length) {
+      setCurrentStep(currentStep + 1);
+    } else {
+      // Calculate most frequent bugType
+      const counts: Record<number, number> = {};
+      nextAnswers.forEach((t) => {
+        counts[t] = (counts[t] || 0) + 1;
+      });
 return <div>Trắc nghiệm bug...</div>;
 }
