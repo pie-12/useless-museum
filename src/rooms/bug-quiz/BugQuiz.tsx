@@ -113,5 +113,50 @@ export function BugQuiz() {
       nextAnswers.forEach((t) => {
         counts[t] = (counts[t] || 0) + 1;
       });
+      let bestType = 1;
+      let maxCount = 0;
+      Object.entries(counts).forEach(([t, count]) => {
+        if (count > maxCount) {
+          maxCount = count;
+          bestType = parseInt(t, 10);
+        }
+      });
+      setResultBug(BUG_PROFILES[bestType]);
+      setCurrentStep(QUESTIONS.length);
+    }
+  };
+
+  const handleRestart = () => {
+    playMechanicalClick();
+    setCurrentStep(0);
+    setAnswers([]);
+    setResultBug(null);
+  };
+
+  // Draw Bug ID Card on Canvas
+  useEffect(() => {
+    if (!resultBug || !canvasRef.current) return;
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    // Background card (Win98 gray / ID plastic)
+    ctx.fillStyle = "#f5f5f5";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Border
+    ctx.strokeStyle = "#333333";
+    ctx.lineWidth = 4;
+    ctx.strokeRect(10, 10, canvas.width - 20, canvas.height - 20);
+
+    // Top banner
+    ctx.fillStyle = "#000080";
+    ctx.fillRect(10, 10, canvas.width - 20, 40);
+
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "bold 15px 'Be Vietnam Pro', Tahoma, sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText("THẺ CĂN CƯỚC LỖI • BUG IDENTITY CARD", canvas.width / 2, 35);
+
 return <div>Trắc nghiệm bug...</div>;
 }
