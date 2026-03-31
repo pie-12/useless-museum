@@ -6,6 +6,7 @@ import { TiredKeyboard } from "@/rooms/tired-keyboard/TiredKeyboard";
 import { UselessConverter } from "@/rooms/useless-converter/UselessConverter";
 import { ScrollMile } from "@/rooms/scroll-mile/ScrollMile";
 import { IdleBonsai } from "@/rooms/idle-bonsai/IdleBonsai";
+import { BugQuiz } from "@/rooms/bug-quiz/BugQuiz";
 import { ArrowLeft, Dices, Hammer, Sparkles, Tag, Minus, Square, X } from "lucide-react";
 
 interface RoomPageProps {
@@ -41,6 +42,8 @@ export default async function RoomPage({ params }: RoomPageProps) {
         return <ScrollMile />;
       case "idle-bonsai":
         return <IdleBonsai />;
+      case "bug-quiz":
+        return <BugQuiz />;
       default:
         return (
           <div className="max-w-xl mx-auto my-12 px-4 text-center">

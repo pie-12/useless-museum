@@ -192,7 +192,7 @@ export const MUSEUM_ROOMS: RoomMetadata[] = [
     description: "Làm quiz nhận thẻ căn cước lỗi của đời bạn.",
     category: "client-only",
     styleTheme: "y2k",
-    status: "coming-soon",
+    status: "open",
     author: "Viện Giám Định Tính Cách IT",
     tags: ["Quiz", "Thẻ căn cước", "Chia sẻ"],
   },
