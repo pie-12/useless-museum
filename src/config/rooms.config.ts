@@ -145,7 +145,7 @@ export const MUSEUM_ROOMS: RoomMetadata[] = [
     tags: ["Idle", "Zen", "Bình tâm"],
   },
   {
-    id: "quang-hue-lang",
+    id: "quang-hue-script",
     roomNumber: 12,
     title: "Ngôn Ngữ Quảng - Huế",
     subtitle: "Răng, rứa, chừ, tê lập trình",
@@ -171,7 +171,7 @@ export const MUSEUM_ROOMS: RoomMetadata[] = [
     tags: ["Còi xe", "Bảng xếp hạng", "Giao thông"],
   },
   {
-    id: "one-word-chat",
+    id: "one-word-chain",
     roomNumber: 14,
     title: "Chat Một Chữ",
     subtitle: "Mỗi người mỗi lượt đúng một từ",
