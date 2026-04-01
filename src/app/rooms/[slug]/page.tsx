@@ -7,7 +7,7 @@ import { UselessConverter } from "@/rooms/useless-converter/UselessConverter";
 import { ScrollMile } from "@/rooms/scroll-mile/ScrollMile";
 import { IdleBonsai } from "@/rooms/idle-bonsai/IdleBonsai";
 import { BugQuiz } from "@/rooms/bug-quiz/BugQuiz";
-import { ArrowLeft, Dices, Hammer, Sparkles, Tag, Minus, Square, X } from "lucide-react";
+import { Minus, Square, X } from "lucide-react";
 
 interface RoomPageProps {
   params: Promise<{
@@ -46,45 +46,54 @@ export default async function RoomPage({ params }: RoomPageProps) {
         return <BugQuiz />;
       default:
         return (
-          <div className="max-w-xl mx-auto my-12 px-4 text-center">
-            <div className="bg-[#fffdf9] border-2 border-dashed border-[#d8c8b0] rounded-3xl p-8 sm:p-12 shadow-ticket">
-              <div className="w-16 h-16 rounded-full bg-[#f4ece0] text-museum-wood flex items-center justify-center mx-auto mb-4">
-                <Hammer className="w-8 h-8 text-museum-stamp animate-bounce" />
-              </div>
-
-              <span className="text-xs font-mono uppercase tracking-widest text-museum-stamp font-bold">
-                ★ PHÒNG TRIỂN LÃM ĐANG DÀN DỰNG ★
-              </span>
-
-              <h2 className="font-serif font-black text-2xl sm:text-3xl text-museum-wood mt-2 mb-3">
-                {room.title}
-              </h2>
-
-              <p className="text-xs font-serif italic text-museum-sepia mb-4">
-                "{room.tagline}"
-              </p>
-
-              <div className="bg-[#f9f5ec] border border-[#e8ddcb] rounded-2xl p-4 text-xs text-museum-sepia text-left leading-relaxed mb-6">
-                <p className="font-bold text-museum-wood mb-1">Mô tả dự kiến:</p>
-                <p>{room.description}</p>
-                <div className="mt-3 pt-3 border-t border-[#e2d6c0] flex items-center justify-between text-[11px] font-mono">
-                  <span>Kỹ sư phụ trách: {room.author}</span>
-                  <span className="capitalize">Theme: {room.styleTheme}</span>
+          <div className="max-w-md mx-auto my-12 px-2">
+            {/* Hộp thoại Setup kiểu Windows 98 */}
+            <div className="win98-box shadow-xl flex flex-col">
+              {/* Title bar của hộp thoại Setup */}
+              <div className="win98-titlebar text-xs">
+                <div className="flex items-center gap-1.5 truncate">
+                  <span>📦</span>
+                  <span className="truncate">Setup.exe — [Phòng {room.roomNumber < 10 ? `0${room.roomNumber}` : room.roomNumber}]</span>
                 </div>
               </div>
 
-              <p className="text-xs font-mono text-museum-sepia mb-6">
-                Các nghệ nhân bảo tàng đang gõ từng dòng code để sớm ra mắt quý khách.
-              </p>
+              {/* Thân hộp thoại */}
+              <div className="p-5 bg-[#c0c0c0] flex flex-col items-center text-center font-mono">
+                {/* Icon đĩa mềm / giải nén */}
+                <div className="text-4xl mb-3 select-none">
+                  💾
+                </div>
 
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-                <Link
-                  href="/"
-                  className="w-full sm:w-auto px-5 py-2.5 rounded-lg bg-museum-wood hover:bg-museum-sepia text-white font-serif text-sm font-semibold flex items-center justify-center gap-2 transition-colors"
-                >
-                  <ArrowLeft className="w-4 h-4" />
-                  <span>Quay Lại Sảnh Chính</span>
-                </Link>
+                <p className="text-sm font-bold text-black mb-1">
+                  {room.title}
+                </p>
+
+                {/* Dòng chữ tối thiểu */}
+                <p className="text-xs text-gray-800 mb-3">
+                  Đang giải nén... 99%
+                </p>
+
+                {/* Thanh tiến trình Win98 kẹt ở 99% */}
+                <div className="w-full bg-white win98-window-sunken h-5 p-0.5 flex gap-0.5 mb-5 select-none">
+                  {Array.from({ length: 24 }).map((_, i) => (
+                    <div
+                      key={i}
+                      className={`h-full ${
+                        i < 23 ? "flex-1 bg-[#000080]" : "w-1.5 bg-transparent"
+                      }`}
+                    />
+                  ))}
+                </div>
+
+                {/* Nút kiểu Win98 */}
+                <div className="w-full flex justify-end gap-2 pt-2 border-t border-gray-400">
+                  <Link
+                    href="/"
+                    className="win98-btn px-5 py-1 text-xs font-bold text-black text-center"
+                  >
+                    Hủy bỏ
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
@@ -131,9 +140,9 @@ export default async function RoomPage({ params }: RoomPageProps) {
         {/* Thanh Menu giả lập */}
         <div className="bg-[#c0c0c0] border-b border-gray-400 px-2 py-0.5 flex items-center justify-between text-xs select-none">
           <div className="flex gap-3">
-            <Link href="/" className="hover:bg-[#000080] hover:text-white px-1 rounded flex items-center gap-1">
+            <Link href="/" className="hover:bg-[#000080] hover:text-white px-1.5 py-0.5 rounded flex items-center gap-1">
               <span>←</span>
-              <span className="underline">Q</span>uay lại Desktop
+              <span><u>Q</u>uay lại Desktop</span>
             </Link>
             <span className="text-gray-600 px-1 hidden sm:inline">
               Chủ đề: {room.styleTheme}
