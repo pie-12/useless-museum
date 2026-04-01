@@ -7,6 +7,7 @@ import { UselessConverter } from "@/rooms/useless-converter/UselessConverter";
 import { ScrollMile } from "@/rooms/scroll-mile/ScrollMile";
 import { IdleBonsai } from "@/rooms/idle-bonsai/IdleBonsai";
 import { BugQuiz } from "@/rooms/bug-quiz/BugQuiz";
+import { DoNothingButton } from "@/rooms/do-nothing-button/DoNothingButton";
 import { Minus, Square, X } from "lucide-react";
 
 interface RoomPageProps {
@@ -32,6 +33,8 @@ export default async function RoomPage({ params }: RoomPageProps) {
   // Khớp slug với component tương ứng
   const renderRoomContent = () => {
     switch (room.id) {
+      case "do-nothing-button":
+        return <DoNothingButton />;
       case "vague-clock":
         return <VagueClock />;
       case "tired-keyboard":
